@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="count"
+            type="Integer" />
+
+        <variable
+            name="item"
+            type="ntu.platform.cookery.data.entity.RecipeStep" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp"
+        tools:context=".ui.fragment.recipe_list.RecipeListFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+
+            <ImageView
+                android:id="@+id/graphic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:loadWithGlide="@{item.graphic}"
+                />
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/graphic"
+                app:layout_constraintLeft_toRightOf="@+id/graphic"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:text="@{@string/step_count(count)}"
+                tools:text="Step #"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{item.instruction}"
+                app:layout_constraintTop_toBottomOf="@+id/btn_delete"
+                app:layout_constraintLeft_toLeftOf="@+id/count"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:text="The text is displayed to instruct user how to prepare/cook for the recipe step by step."/>
+
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_cross"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

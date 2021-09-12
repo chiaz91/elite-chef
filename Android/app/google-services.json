@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "875654500501",
+    "project_id": "sample-recipe-fc070",
+    "storage_bucket": "sample-recipe-fc070.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875654500501:android:6a629bfc24ff3533ca0b9c",
+        "android_client_info": {
+          "package_name": "ntu.platform.cookery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "875654500501-mjutdt5ij3q27mr9fq1dabs2npu45beg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ntu.platform.cookery",
+            "certificate_hash": "3fea5b462b5c0b78bb031ebec05349f7f11294a5"
+          }
+        },
+        {
+          "client_id": "875654500501-0il4c1c320h51hd9ilj65t350ajc1bsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvUYfD8en-MKEjgp8gQsZB505nmQSw9Mg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "875654500501-0il4c1c320h51hd9ilj65t350ajc1bsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

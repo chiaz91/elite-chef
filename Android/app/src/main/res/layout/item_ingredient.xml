@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="ntu.platform.cookery.data.entity.Ingredient" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp"
+        tools:context=".ui.fragment.recipe_list.RecipeListFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:maxWidth="100dp"
+                android:text="@{Integer.toString(item.amount)+item.unit}"
+                tools:text="100 g"/>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@{item.name}"
+                tools:text="Ingredient name"/>
+
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cross"
+                android:background="?selectableItemBackgroundBorderless"
+                />
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

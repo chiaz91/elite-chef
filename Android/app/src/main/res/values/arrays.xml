@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="units">
+        <item>g</item>
+        <item>ml</item>
+        <item>tsp</item>
+        <item>tbsp</item>
+        <item>bag</item>
+        <item>bar</item>
+        <item>bulb</item>
+        <item>capsule</item>
+        <item>cl</item>
+        <item>clove</item>
+        <item>cob</item>
+        <item>cup</item>
+        <item>dash</item>
+        <item>drop</item>
+        <item>gal</item>
+        <item>head</item>
+        <item>kg</item>
+        <item>l</item>
+        <item>leaf</item>
+        <item>loaf</item>
+        <item>oz</item>
+        <item>package</item>
+        <item>pinch</item>
+        <item>scoop</item>
+        <item>sheet</item>
+        <item>slice</item>
+        <item>sprig</item>
+        <item>stalk</item>
+        <item>strip</item>
+        <item>tea bag</item>
+    </string-array>
+
+    <string-array name="type">
+        <item>Appetizer</item>
+        <item>Salad</item>
+        <item>Main</item>
+        <item>Soup</item>
+        <item>Dessert</item>
+        <item>Side</item>
+        <item>Beverage</item>
+        <item>Alcoholic</item>
+        <item>Flavouring</item>
+        <item>Bakery</item>
+    </string-array>
+
+    <string-array name="cuisine">
+        <item>Chinese</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Western</item>
+        <item>French</item>
+        <item>Italian</item>
+        <item>Nordic</item>
+        <item>Spanish</item>
+        <item>Indian</item>
+    </string-array>
+
+    <string-array name="occasion">
+        <item>vegan</item>
+        <item>halal</item>
+        <item>healthy</item>
+    </string-array>
+
+
+</resources>

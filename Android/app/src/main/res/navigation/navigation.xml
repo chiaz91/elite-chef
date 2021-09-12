@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="ntu.platform.cookery.ui.fragment.recipe_list.RecipeListFragment"
+        android:label="Recipes"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_addRecipeInfoFragment"
+            app:destination="@id/addRecipeInfoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeInfoFragment"
+        android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeInfoFragment"
+        android:label="Recipe Info"
+        tools:layout="@layout/fragment_add_recipe_info">
+        <action
+            android:id="@+id/action_addRecipeInfoFragment_to_addRecipeIngredientFragment"
+            app:destination="@id/addRecipeIngredientFragment" />
+        <argument
+            android:name="recipeId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeIngredientFragment"
+        android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeIngredientFragment"
+        android:label="Create Ingredients"
+        tools:layout="@layout/fragment_add_recipe_ingredient">
+        <action
+            android:id="@+id/action_addRecipeIngredientFragment_to_addRecipeStepsFragment"
+            app:destination="@id/addRecipeStepsFragment" />
+        <action
+            android:id="@+id/action_addRecipeIngredientFragment_to_addRecipeIngredientInfoFragment"
+            app:destination="@id/addRecipeIngredientInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeStepsFragment"
+        android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeStepFragment"
+        android:label="Recipe Steps"
+        tools:layout="@layout/fragment_add_recipe_steps">
+        <action
+            android:id="@+id/action_addRecipeStepsFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addRecipeStepsFragment_to_addRecipeStepInfoFragment"
+            app:destination="@id/addRecipeStepInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRecipeIngredientInfoFragment"
+        android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeIngredientInfoFragment"
+        android:label="Ingredient Info"
+
+        tools:layout="@layout/fragment_add_recipe_ingredient_info"/>
+    <fragment
+        android:id="@+id/addRecipeStepInfoFragment"
+        android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeStepInfoFragment"
+        android:label="Step Info"
+        tools:layout="@layout/fragment_add_recipe_steps_info"/>
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="ntu.platform.cookery.ui.fragment.recipe_details.RecipeDetailsFragment"
+        android:label="Recipe Details"
+        tools:layout="@layout/fragment_recipe_details">
+        <argument
+            android:name="recipeId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_recipeDetailsFragment_to_addRecipeInfoFragment"
+            app:destination="@id/addRecipeInfoFragment" />
+    </fragment>
+</navigation>

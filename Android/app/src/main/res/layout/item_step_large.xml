@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="count"
+            type="Integer" />
+
+        <variable
+            name="item"
+            type="ntu.platform.cookery.data.entity.RecipeStep" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp"
+        tools:context=".ui.fragment.recipe_list.RecipeListFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:text="@{@string/step_count(count)}"
+                tools:text="Step #"/>
+
+
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{item.instruction}"
+                app:layout_constraintTop_toBottomOf="@+id/count"
+                app:layout_constraintStart_toStartOf="@+id/count"
+                tools:text="The text is displayed to instruct user how to prepare/cook for the recipe step by step."/>
+
+            <ImageView
+                android:id="@+id/graphic"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_launcher_foreground"
+                android:background="#f0f0f0"
+                android:visibility="@{item.graphic!=null?View.VISIBLE:View.GONE}"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintStart_toStartOf="@+id/description"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:loadWithGlide="@{item.graphic}"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>
