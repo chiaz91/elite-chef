@@ -45,6 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/label_steps"
                 app:layout_constraintBottom_toTopOf="@+id/btn_save"
                 app:listLiveData="@{viewModel.steps}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_step"/>
 
             <Button

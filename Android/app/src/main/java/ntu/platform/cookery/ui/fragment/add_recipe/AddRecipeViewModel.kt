@@ -1,7 +1,6 @@
 package ntu.platform.cookery.ui.fragment.add_recipe
 
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +12,8 @@ import ntu.platform.cookery.data.firebase.FBRepository
 
 private const val TAG = "CY.VM.AddRecipe"
 class AddRecipeViewModel: ViewModel() {
+    val recipeId = MutableLiveData<String?>()
+
     // recipe info
     val name = MutableLiveData<String?>()
     val desc = MutableLiveData<String?>()
@@ -30,6 +31,20 @@ class AddRecipeViewModel: ViewModel() {
     val stepGraphic = MutableLiveData<String?>()
 
 
+    fun setUpRecipe(recipe: Recipe){
+        name.value = recipe.name
+        desc.value = recipe.description
+        graphic.value = recipe.graphic
+    }
+    fun setUpIngredients(ingredients: List<Ingredient>){
+        this.ingredients.clear()
+        this.ingredients.addAll(ingredients)
+    }
+
+    fun setUpSteps(steps: List<RecipeStep>){
+        this.steps.clear()
+        this.steps.addAll(steps)
+    }
 
     fun addStep(){
         // TODO: validate data
@@ -45,7 +60,12 @@ class AddRecipeViewModel: ViewModel() {
         // TODO: navigate and clear viewModel
 
         Log.d(TAG, "save recipe")
-        val recipe = Recipe(name.value!!, desc.value!!, graphic.value?.toString() )
+        val recipe = Recipe(
+            name.value!!,
+            desc.value!!,
+            graphic.value?.toString(),
+            key = recipeId.value
+        )
         // TODO: send out event
         val refRecipe = FBRepository.saveRecipe(recipe)
         FBRepository.saveRecipeIngredients(refRecipe.key!!, ingredients.value!!)
@@ -65,32 +85,13 @@ class AddRecipeViewModel: ViewModel() {
 
     fun clear(){
         // TODO: implement clear
-
+        recipeId.value = null
         name.value = null
         desc.value = null
         graphic.value = null
         ingredients.clear()
         steps.clear()
     }
-
-    init{
-    // test data
-        name.value = "cold noodle"
-        desc.value = "home made cold noodle"
-        ingredients.apply {
-            add(Ingredient("Cucumber", 1, "unit"))
-            add(Ingredient("Carrot", 1, "unit"))
-            add(Ingredient("Noodle", 1, "package"))
-        }
-        steps.apply {
-            add(RecipeStep("Cut cucumber"))
-            add(RecipeStep( "Cut Carrot"))
-            add(RecipeStep( "Mix together"))
-            add(RecipeStep( "place in refrigerator"))
-        }
-
-    }
-
 
 
 }

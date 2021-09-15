@@ -4,12 +4,13 @@ package ntu.platform.cookery.util
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
@@ -31,6 +32,10 @@ fun Fragment.setTitle(title: String) {
     if (activity is AppCompatActivity) {
         (activity as AppCompatActivity).supportActionBar?.title = title
     }
+}
+
+fun Fragment.setTitle(@StringRes stringId: Int) {
+    setTitle(requireContext().getString(stringId))
 }
 
 fun Fragment.setDisplayHomeAsUp(enabled: Boolean) {
@@ -78,4 +83,13 @@ fun Uri.getExtension(context: Context? = null): String {
     } else {
         name.substring(name.lastIndexOf(".")+1)
     }
+}
+
+
+fun  <T : Any> List<T>.log(tag:String? = "Cy.Debug"){
+    Log.d(tag, "List.size = $size")
+    forEach{ingredient ->
+        Log.d(tag, ingredient.toString())
+    }
+
 }

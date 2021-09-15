@@ -3,11 +3,9 @@ package ntu.platform.cookery.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import ntu.platform.cookery.BR
 import ntu.platform.cookery.databinding.ItemAddMoreBinding
 import ntu.platform.cookery.databinding.ItemIngredientBinding
-import ntu.platform.cookery.databinding.ItemIngredientBindingImpl
 import ntu.platform.cookery.data.entity.Ingredient
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.BaseRecyclerViewAdapter
@@ -15,17 +13,18 @@ import ntu.platform.cookery.base.BaseRecyclerViewHolder
 
 
 
-class RecipeIngredientAdapter: BaseRecyclerViewAdapter<Ingredient>() {
+class RecipeIngredientAdapter(
+        var allowEdit:Boolean = false,
+        var clickedListener: BaseClickedListener? = null
+    ): BaseRecyclerViewAdapter<Ingredient>() {
     companion object{
         private const val TYPE_ADD_MORE = 0
         private const val TYPE_ITEM = 1
         const val ACTION_ADD_MORE_CLICK = 1001
         const val ACTION_ITEM_CLICK = 1002
-        const val ACTION_DELETE_ITEM = 1003
+        const val ACTION_ITEM_DELETE = 1003
     }
 
-    var allowEdit = false
-    var clickedListener: BaseClickedListener? = null
 
     override fun getItemCount() = when{
         allowEdit -> super.getItemCount() +1
@@ -88,7 +87,7 @@ class RecipeIngredientAdapter: BaseRecyclerViewAdapter<Ingredient>() {
                 else -> View.GONE
             }
             binding.btnDelete.setOnClickListener{
-                clickedListener?.onClick(ACTION_DELETE_ITEM, this)
+                clickedListener?.onClick(ACTION_ITEM_DELETE, this)
             }
         }
     }

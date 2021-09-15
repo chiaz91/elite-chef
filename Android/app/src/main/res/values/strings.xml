@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">fyp</string>
+    <string name="title_create_recipe">Create Recipe</string>
+    <string name="title_edit_recipe">Edit Recipe</string>
+    <string name="title_add_Ingredient">Add Ingredient</string>
+    <string name="title_add_step">Add Step</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="step_count">Step %d</string>
-
 
     <string name="cooking">cooking</string>
     <string name="resting">resting</string>
@@ -16,10 +19,7 @@
     <string name="delete">Delete</string>
 
 
-    <!--  Test Message  -->
-    <string name="test_msg">this is a sample text represent the recipe description, it supposed to be long enough to show multi-lines. the longer the better </string>
-    <string name="test_desc">Pound 2 stalks of lemongrass and cut into 3 cm/ 1 inch pieces. Add water, salt, chilli, half of the garlic, lemongrass, and the chicken into a pot over medium heat. Bring to the boil. Then reduce the heat. Simmer without the lid for 20 min. until the chicken is cooked. Remove the chicken from the pot. Set aside and let cool</string>
-    <string name="add">Add</string>
+   <string name="add">Add</string>
     <string name="add_more">Add More</string>
     <string name="recipe_graphic">Recipe graphic</string>
     <string name="step_info">Step Info</string>
@@ -38,5 +38,11 @@
     <string name="ingredient_name">Ingredient name</string>
     <string name="amount">Amount</string>
     <string name="unit">Unit</string>
+    <string name="deletion">Deletion</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="warn_deleting_recipe_message">Deleting of recipe cannot be undone.</string>
+    <string name="warn_delete_ingredient_message">Deleting of ingredient cannot be undone</string>
+    <string name="warn_delete_step_message">Deleting of step cannot be undone</string>
 
 </resources>

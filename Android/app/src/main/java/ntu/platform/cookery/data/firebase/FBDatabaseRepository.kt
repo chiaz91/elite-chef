@@ -67,51 +67,44 @@ object FBRepository{
 
     fun getRecipe(recipeId: String): MutableLiveData<Recipe>{
         val result = MutableLiveData<Recipe>()
-        db.reference.child(REF_RECIPES).child(recipeId).addValueEventListener(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                result.value = snapshot.getValue<Recipe>()
+        db.reference.child(REF_RECIPES).child(recipeId).get()
+            .addOnSuccessListener {
+                result.value = it.getValue<Recipe>()
             }
-            override fun onCancelled(error: DatabaseError) {
-                Log.e(TAG, "getRecipe failed, err=${error.message}")
+            .addOnFailureListener{
+                Log.e(TAG, "getRecipe failed, err=${it.message}")
             }
-        })
-//        db.reference.child(REF_RECIPES).child(recipeId).get()
-//            .addOnSuccessListener {
-//                result.value = it.getValue<Recipe>()
-//            }
-//            .addOnFailureListener{
-//                Log.e(TAG, "getRecipe failed, err=${it.message}")
-//            }
         return result
     }
 
     fun getRecipeIngredients(recipeId: String): MutableLiveData<List<Ingredient>>{
         val result = MutableLiveData<List<Ingredient>>()
-        db.reference.child(REF_INGREDIENTS).child(recipeId).addValueEventListener(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                result.value = snapshot.getValue<List<Ingredient>>()
+        db.reference.child(REF_INGREDIENTS).child(recipeId).get()
+            .addOnSuccessListener {
+                result.value = it.getValue<List<Ingredient>>()
             }
-            override fun onCancelled(error: DatabaseError) {
-                Log.e(TAG, "getRecipeIngredients failed, err=${error.message}")
+            .addOnFailureListener{
+                Log.e(TAG, "getRecipeIngredients failed, err=${it.message}")
             }
-        })
         return result
     }
 
     fun getRecipeSteps(recipeId: String): MutableLiveData<List<RecipeStep>>{
         val result = MutableLiveData<List<RecipeStep>>()
-        db.reference.child(REF_STEPS).child(recipeId).addValueEventListener(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                result.value = snapshot.getValue<List<RecipeStep>>()
+        db.reference.child(REF_STEPS).child(recipeId).get()
+            .addOnSuccessListener {
+                result.value = it.getValue<List<RecipeStep>>()
             }
-            override fun onCancelled(error: DatabaseError) {
-                Log.e(TAG, "getRecipeSteps failed, err=${error.message}")
+            .addOnFailureListener {
+                Log.e(TAG, "getRecipeSteps failed, err=${it.message}")
             }
-        })
         return result
+    }
+
+    fun deleteRecipe(recipeId: String){
+        db.reference.child(REF_INGREDIENTS).child(recipeId).removeValue()
+        db.reference.child(REF_STEPS).child(recipeId).removeValue()
+        db.reference.child(REF_RECIPES).child(recipeId).removeValue()
     }
 
     fun getRecipeOptions(): FirebaseRecyclerOptions<Recipe> {

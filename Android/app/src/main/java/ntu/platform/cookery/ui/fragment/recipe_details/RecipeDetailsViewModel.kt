@@ -7,7 +7,7 @@ import ntu.platform.cookery.ui.adapter.RecipeIngredientAdapter
 import ntu.platform.cookery.ui.adapter.RecipeStepLargePicAdapter
 
 private const val TAG = "CY.VM.RecipeDetail"
-class RecipeDetailsViewModel(private val recipeId: String): ViewModel() {
+class RecipeDetailsViewModel(val recipeId: String): ViewModel() {
     var recipe = FBRepository.getRecipe(recipeId)
     var ingredients = FBRepository.getRecipeIngredients(recipeId)
     var steps = FBRepository.getRecipeSteps(recipeId)

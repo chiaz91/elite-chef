@@ -3,7 +3,6 @@ package ntu.platform.cookery.ui.fragment.add_recipe
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ntu.platform.cookery.R
@@ -33,12 +32,8 @@ class AddRecipeIngredientInfoFragment : BindingFragment<FragmentAddRecipeIngredi
 
     private fun initToolbar(){
         setToolBar(binding.toolbarLayout.toolbar)
-        setTitle("Add Ingredient")
+        setTitle(R.string.title_add_Ingredient)
         setDisplayHomeAsUp(true)
-        binding.toolbarLayout.progress.apply {
-            progress = 2
-            max = 3
-        }
     }
 
 

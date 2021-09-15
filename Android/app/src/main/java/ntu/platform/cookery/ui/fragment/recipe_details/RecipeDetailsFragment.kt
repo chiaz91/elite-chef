@@ -1,23 +1,18 @@
 package ntu.platform.cookery.ui.fragment.recipe_details
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.NavigationUI
-import ntu.platform.cookery.databinding.FragmentMainBinding
+import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.data.firebase.FBRepository
 import ntu.platform.cookery.databinding.FragmentRecipeDetailsBinding
-import ntu.platform.cookery.ui.fragment.recipe_list.RecipeListFragmentDirections
-import ntu.platform.cookery.ui.fragment.recipe_list.RecipeListViewModel
+import ntu.platform.cookery.util.log
 import ntu.platform.cookery.util.setDisplayHomeAsUp
-import ntu.platform.cookery.util.setTitle
 import ntu.platform.cookery.util.setToolBar
 
 
@@ -45,6 +40,9 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
 
         initBinding()
         observeViewModel()
+
+        // TODO: pending only author can modify
+        setHasOptionsMenu(true)
     }
 
     private fun initBinding(){
@@ -62,10 +60,7 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
             _viewModel.ingredientsAdapter.notifyDataSetChanged()
 
             // TODO: remove below
-            Log.d(TAG, "ingredients.size = ${it.size}")
-            it.forEach{ingredient ->
-                Log.d(TAG, ingredient.toString())
-            }
+            it.log()
         })
 
         _viewModel.steps.observe(viewLifecycleOwner, {
@@ -73,10 +68,7 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
             _viewModel.stepsAdapter.notifyDataSetChanged()
 
             // TODO: remove below
-            Log.d(TAG, "steps.size = ${it.size}")
-            it.forEach{ step->
-                Log.d(TAG, step.toString())
-            }
+            it.log()
         })
     }
 
@@ -90,6 +82,40 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
 //        super.onStop()
 //    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.edit, menu);
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_edit -> {
+                val recipeID = _viewModel.recipeId
+                val action = RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToAddRecipeInfoFragment(recipeID)
+                findNavController().navigate(action)
+                true
+            }
+            R.id.action_delete -> {
+                showDeleteDialog()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    // dialog
+    private fun showDeleteDialog(){
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.deletion))
+            .setMessage(getString(R.string.warn_deleting_recipe_message))
+            .setPositiveButton(getString(R.string.confirm)) { _, i ->
+                FBRepository.deleteRecipe(_viewModel.recipeId)
+                findNavController().popBackStack()
+            }
+            .setNegativeButton(getString(R.string.cancel),null)
+            .show()
+    }
 
 
 }

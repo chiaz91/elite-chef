@@ -18,7 +18,7 @@
 
         <include
             android:id="@+id/toolbar_layout"
-            layout="@layout/tool_bar_progress"/>
+            layout="@layout/tool_bar"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

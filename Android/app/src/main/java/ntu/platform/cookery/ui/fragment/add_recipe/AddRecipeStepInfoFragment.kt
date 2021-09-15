@@ -2,7 +2,6 @@ package ntu.platform.cookery.ui.fragment.add_recipe
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -14,7 +13,6 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.databinding.FragmentAddRecipeStepsInfoBinding
-import ntu.platform.cookery.data.entity.RecipeStep
 import ntu.platform.cookery.data.firebase.FBStorageRepository
 import ntu.platform.cookery.util.loadWithGlide
 import ntu.platform.cookery.util.setDisplayHomeAsUp
@@ -64,12 +62,8 @@ class AddRecipeStepInfoFragment : BindingFragment<FragmentAddRecipeStepsInfoBind
 
     private fun initToolbar(){
         setToolBar(binding.toolbarLayout.toolbar)
-        setTitle("Add Step")
+        setTitle(R.string.title_add_step)
         setDisplayHomeAsUp(true)
-        binding.toolbarLayout.progress.apply {
-            progress = 2
-            max = 3
-        }
     }
 
     private fun initBinding(){

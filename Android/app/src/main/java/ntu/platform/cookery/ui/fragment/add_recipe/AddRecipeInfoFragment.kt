@@ -9,13 +9,14 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.github.dhaval2404.imagepicker.ImagePicker
+import ntu.platform.cookery.R
 import ntu.platform.cookery.databinding.FragmentAddRecipeInfoBinding
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.data.firebase.FBRepository
 import ntu.platform.cookery.data.firebase.FBStorageRepository
-import ntu.platform.cookery.util.loadWithGlide
 import ntu.platform.cookery.util.setDisplayHomeAsUp
 import ntu.platform.cookery.util.setTitle
 import ntu.platform.cookery.util.setToolBar
@@ -27,6 +28,8 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
     override val bindingInflater: (LayoutInflater) -> FragmentAddRecipeInfoBinding
         get() = FragmentAddRecipeInfoBinding::inflate
 
+
+    private val args by navArgs<AddRecipeInfoFragmentArgs>()
     private val _viewModel: AddRecipeViewModel by  activityViewModels()
 
     private val imageResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -54,14 +57,41 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // reading arguments
+        args.recipeId?.let{ recipeId ->
+            Log.d(TAG, "arg.recipe_id = $recipeId")
+            if (_viewModel.recipeId.value != recipeId){
+                _viewModel.recipeId.value = recipeId
+
+                loadRecipeById(recipeId)
+            }
+        }
+
         // set up toolbar
         initToolbar()
         initBinding()
     }
 
+    private fun loadRecipeById(recipeId:String){
+        FBRepository.getRecipe(recipeId).observe(viewLifecycleOwner, {
+            _viewModel.setUpRecipe(it)
+        })
+        FBRepository.getRecipeIngredients(recipeId).observe(viewLifecycleOwner, {
+            _viewModel.setUpIngredients(it)
+        })
+        FBRepository.getRecipeSteps(recipeId).observe(viewLifecycleOwner, {
+            Log.d(TAG, "steps ${it!!.size}")
+            _viewModel.setUpSteps(it)
+        })
+    }
+
     private fun initToolbar(){
         setToolBar(binding.toolbarLayout.toolbar)
-        setTitle("Create Recipe")
+        when{
+            args.recipeId!=null -> setTitle(R.string.title_edit_recipe)
+            else -> setTitle(R.string.title_create_recipe)
+        }
+
         setDisplayHomeAsUp(true)
         binding.toolbarLayout.progress.apply {
             progress = 1
@@ -87,6 +117,7 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
             }
         }
     }
+
 
     private fun launchImagePicker(){
         ImagePicker.with(this)
