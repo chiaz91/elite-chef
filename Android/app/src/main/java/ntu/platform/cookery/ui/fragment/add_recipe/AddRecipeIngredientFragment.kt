@@ -41,8 +41,8 @@ class AddRecipeIngredientFragment : BindingFragment<FragmentAddRecipeIngredientB
         }
         setDisplayHomeAsUp(true)
         binding.toolbarLayout.progress.apply {
-            progress = 2
-            max = 3
+            progress = 3
+            max = 4
         }
     }
 

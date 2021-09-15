@@ -97,7 +97,7 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
         setDisplayHomeAsUp(true)
         binding.toolbarLayout.progress.apply {
             progress = 1
-            max = 3
+            max = 4
         }
     }
 
@@ -111,7 +111,7 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
                     Toast.makeText(requireContext(),  getString(R.string.message_graphic_is_required), Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                val action = AddRecipeInfoFragmentDirections.actionAddRecipeInfoFragmentToAddRecipeIngredientFragment()
+                val action = AddRecipeInfoFragmentDirections.actionAddRecipeInfoFragmentToAddRecipeTimingFragment()
                 findNavController().navigate(action)
             }
             graphic.setOnClickListener {

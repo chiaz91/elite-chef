@@ -39,8 +39,8 @@ class AddRecipeStepFragment : BindingFragment<FragmentAddRecipeStepsBinding>() {
         }
         setDisplayHomeAsUp(true)
         binding.toolbarLayout.progress.apply {
-            progress = 3
-            max = 3
+            progress = 4
+            max = 4
         }
     }
 

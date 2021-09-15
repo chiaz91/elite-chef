@@ -21,13 +21,23 @@
         android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeInfoFragment"
         android:label="@string/title_recipe_info"
         tools:layout="@layout/fragment_add_recipe_info">
-        <action
-            android:id="@+id/action_addRecipeInfoFragment_to_addRecipeIngredientFragment"
-            app:destination="@id/addRecipeIngredientFragment" />
         <argument
             android:name="recipeId"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_addRecipeInfoFragment_to_addRecipeTimingFragment"
+            app:destination="@id/addRecipeTimingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addRecipeTimingFragment"
+        android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeTimingFragment"
+        android:label="AddRecipeTimingFragment"
+        tools:layout="@layout/fragment_add_recipe_timing" >
+        <action
+            android:id="@+id/action_addRecipeTimingFragment_to_addRecipeIngredientFragment"
+            app:destination="@id/addRecipeIngredientFragment" />
     </fragment>
     <fragment
         android:id="@+id/addRecipeIngredientFragment"
@@ -78,4 +88,5 @@
             android:id="@+id/action_recipeDetailsFragment_to_addRecipeInfoFragment"
             app:destination="@id/addRecipeInfoFragment" />
     </fragment>
+
 </navigation>

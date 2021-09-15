@@ -113,18 +113,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cooking"
-                        app:layout_constraintEnd_toStartOf="@+id/label_resting"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/label_resting"
-                        style="@style/Label.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/resting"
                         app:layout_constraintEnd_toStartOf="@+id/label_baking"
-                        app:layout_constraintStart_toEndOf="@+id/label_cooking"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -133,8 +123,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/baking"
+                        app:layout_constraintEnd_toStartOf="@+id/label_resting"
+                        app:layout_constraintStart_toEndOf="@+id/label_cooking"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/label_resting"
+                        style="@style/Label.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/resting"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/label_resting"
+                        app:layout_constraintStart_toEndOf="@+id/label_baking"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -149,16 +149,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/label_cooking"
                         tools:text="10" />
 
-                    <TextView
-                        style="@style/TimingText"
-                        android:id="@+id/time_resting"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{Integer.toString(viewModel.recipe.timeRestMin)}"
-                        app:layout_constraintEnd_toEndOf="@+id/label_resting"
-                        app:layout_constraintStart_toStartOf="@+id/label_resting"
-                        app:layout_constraintTop_toBottomOf="@+id/label_resting"
-                        tools:text="10" />
 
                     <TextView
                         style="@style/TimingText"
@@ -169,6 +159,18 @@
                         app:layout_constraintEnd_toEndOf="@+id/label_baking"
                         app:layout_constraintStart_toStartOf="@+id/label_baking"
                         app:layout_constraintTop_toBottomOf="@+id/label_baking"
+                        tools:text="10" />
+
+
+                    <TextView
+                        style="@style/TimingText"
+                        android:id="@+id/time_resting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{Integer.toString(viewModel.recipe.timeRestMin)}"
+                        app:layout_constraintEnd_toEndOf="@+id/label_resting"
+                        app:layout_constraintStart_toStartOf="@+id/label_resting"
+                        app:layout_constraintTop_toBottomOf="@+id/label_resting"
                         tools:text="10" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,4 +12,7 @@ data class Recipe(
     var timeRestMin: Int = 0,
 //    var author: String? = null,
     @get:Exclude var key: String? = null,
-)
+){
+
+    fun totalTime() = timePrepareMin+timeBakingMin+timeRestMin
+}

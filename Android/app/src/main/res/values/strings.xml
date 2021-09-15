@@ -52,7 +52,13 @@
     <string name="warn_delete_ingredient_message">Deleting of ingredient cannot be undone</string>
     <string name="warn_delete_step_message">Deleting of step cannot be undone</string>
     <string name="message_graphic_is_required">Graphic is required!</string>
-
+    <string name="prepare_time">Prepare Time</string>
+    <string name="prepare_time_helper">Time spend actively prepare or cook the food</string>
+    <string name="baking_time">Baking Time</string>
+    <string name="baking_time_helper">Duration for the dish to be bake for</string>
+    <string name="rest_time">Rest Time</string>
+    <string name="rest_time_helper">Duration for the dish to be rest aside.</string>
+    <string name="suffix_minutes">mins</string>
 
 
 </resources>

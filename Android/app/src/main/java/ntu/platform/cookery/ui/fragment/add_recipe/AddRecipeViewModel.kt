@@ -21,6 +21,11 @@ class AddRecipeViewModel: ViewModel() {
     val ingredients = MutableListLiveData<Ingredient>()
     val steps = MutableListLiveData<RecipeStep>()
 
+    val timePrepare = MutableLiveData<String?>("0")
+    val timeBake = MutableLiveData<String?>("0")
+    val timeRest = MutableLiveData<String?>("0")
+
+
     // ingredient info
     val ingredientName = MutableLiveData<String?>()
     val ingredientAmount = MutableLiveData<String?>()
@@ -60,9 +65,12 @@ class AddRecipeViewModel: ViewModel() {
 
         Log.d(TAG, "save recipe")
         val recipe = Recipe(
-            name.value!!,
-            desc.value!!,
-            graphic.value?.toString(),
+            name = name.value!!,
+            description = desc.value!!,
+            graphic = graphic.value?.toString(),
+            timePrepareMin = Integer.parseInt(timePrepare.value?.toString() ?: "0"),
+            timeBakingMin = Integer.parseInt(timeBake.value?.toString() ?: "0"),
+            timeRestMin = Integer.parseInt(timeRest.value?.toString() ?: "0"),
             key = recipeId.value
         )
         // TODO: send out event?
@@ -88,6 +96,9 @@ class AddRecipeViewModel: ViewModel() {
         name.value = null
         desc.value = null
         graphic.value = null
+        timePrepare.value = "0"
+        timeBake.value = "0"
+        timeRest.value = "0"
         ingredients.clear()
         steps.clear()
     }
