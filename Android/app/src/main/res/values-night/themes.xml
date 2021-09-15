@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.EC" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -10,7 +11,25 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
         <!-- Customize your theme here. -->
+
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">?attr/backgroundColor</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Widget.EC.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:theme">@style/Theme.EC</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    </style>
+
+    <style name="Theme.NestedScrolling.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <!--        <item name="colorControlNormal">#F00</item>-->
+        <!--        <item name="android:textColorPrimary">#00F</item>-->
+    </style>
+
+    <style name="Theme.NestedScrolling.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" >
     </style>
 </resources>

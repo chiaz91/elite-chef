@@ -33,6 +33,9 @@ object FBRepository{
         }
         //FirebaseDatabase.getInstance("url if needed")
         db = Firebase.database
+
+        // TODO, test offline
+        db.setPersistenceEnabled(true)
     }
 
 
