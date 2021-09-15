@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 open class BaseRecyclerViewHolder (open val binding: ViewDataBinding): RecyclerView.ViewHolder(binding.root){
 
+    /* Use like:
+     * BaseRecyclerViewHolder.from(parent, ItemStepBinding::inflate)
+     */
     companion object {
         inline fun from(
                 parent: ViewGroup,
@@ -17,4 +20,5 @@ open class BaseRecyclerViewHolder (open val binding: ViewDataBinding): RecyclerV
             return BaseRecyclerViewHolder(binding)
         }
     }
+
 }

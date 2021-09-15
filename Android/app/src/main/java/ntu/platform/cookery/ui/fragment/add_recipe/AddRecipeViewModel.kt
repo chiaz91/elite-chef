@@ -57,7 +57,6 @@ class AddRecipeViewModel: ViewModel() {
     fun saveRecipe(){
         // TODO: validate data
         // TODO: save data
-        // TODO: navigate and clear viewModel
 
         Log.d(TAG, "save recipe")
         val recipe = Recipe(
@@ -66,7 +65,7 @@ class AddRecipeViewModel: ViewModel() {
             graphic.value?.toString(),
             key = recipeId.value
         )
-        // TODO: send out event
+        // TODO: send out event?
         val refRecipe = FBRepository.saveRecipe(recipe)
         FBRepository.saveRecipeIngredients(refRecipe.key!!, ingredients.value!!)
         FBRepository.saveRecipeSteps(refRecipe.key!!, steps.value!!)
@@ -79,12 +78,12 @@ class AddRecipeViewModel: ViewModel() {
     }
 
     fun clearStepInfo(){
+        stepGraphic.value = null
         instruction.value = null
     }
 
 
     fun clear(){
-        // TODO: implement clear
         recipeId.value = null
         name.value = null
         desc.value = null

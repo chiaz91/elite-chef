@@ -15,6 +15,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import ntu.platform.cookery.R
 import ntu.platform.cookery.databinding.FragmentAddRecipeInfoBinding
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.base.DIR_IMAGE_PICKER
 import ntu.platform.cookery.data.firebase.FBRepository
 import ntu.platform.cookery.data.firebase.FBStorageRepository
 import ntu.platform.cookery.util.setDisplayHomeAsUp
@@ -73,16 +74,17 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
     }
 
     private fun loadRecipeById(recipeId:String){
-        FBRepository.getRecipe(recipeId).observe(viewLifecycleOwner, {
-            _viewModel.setUpRecipe(it)
-        })
-        FBRepository.getRecipeIngredients(recipeId).observe(viewLifecycleOwner, {
-            _viewModel.setUpIngredients(it)
-        })
-        FBRepository.getRecipeSteps(recipeId).observe(viewLifecycleOwner, {
-            Log.d(TAG, "steps ${it!!.size}")
-            _viewModel.setUpSteps(it)
-        })
+        with(FBRepository){
+            getRecipe(recipeId).observe(viewLifecycleOwner, {
+                _viewModel.setUpRecipe(it)
+            })
+            getRecipeIngredients(recipeId).observe(viewLifecycleOwner, {
+                _viewModel.setUpIngredients(it)
+            })
+            getRecipeSteps(recipeId).observe(viewLifecycleOwner, {
+                _viewModel.setUpSteps(it)
+            })
+        }
     }
 
     private fun initToolbar(){
@@ -106,7 +108,7 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
 
             btnNext.setOnClickListener {
                 if (_viewModel.graphic.value == null){
-                    Toast.makeText(requireContext(),  "Graphic is required!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),  getString(R.string.message_graphic_is_required), Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
                 val action = AddRecipeInfoFragmentDirections.actionAddRecipeInfoFragmentToAddRecipeIngredientFragment()
@@ -123,7 +125,7 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
         ImagePicker.with(this)
             .cropSquare()
             .maxResultSize(1080,1080)
-            .saveDir(File(requireContext().cacheDir, "ImagePicker"))
+            .saveDir(File(requireContext().cacheDir, DIR_IMAGE_PICKER))
             .createIntent { intent-> imageResultLauncher.launch(intent) }
     }
 

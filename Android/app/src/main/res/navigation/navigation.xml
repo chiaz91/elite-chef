@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="ntu.platform.cookery.ui.fragment.recipe_list.RecipeListFragment"
-        android:label="Recipes"
+        android:label="@string/title_recipes"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_addRecipeInfoFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/addRecipeInfoFragment"
         android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeInfoFragment"
-        android:label="Recipe Info"
+        android:label="@string/title_recipe_info"
         tools:layout="@layout/fragment_add_recipe_info">
         <action
             android:id="@+id/action_addRecipeInfoFragment_to_addRecipeIngredientFragment"
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/addRecipeIngredientFragment"
         android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeIngredientFragment"
-        android:label="Create Ingredients"
+        android:label="@string/title_ingredient_list"
         tools:layout="@layout/fragment_add_recipe_ingredient">
         <action
             android:id="@+id/action_addRecipeIngredientFragment_to_addRecipeStepsFragment"
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/addRecipeStepsFragment"
         android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeStepFragment"
-        android:label="Recipe Steps"
+        android:label="@string/title_step_list"
         tools:layout="@layout/fragment_add_recipe_steps">
         <action
             android:id="@+id/action_addRecipeStepsFragment_to_mainFragment"
@@ -58,18 +58,18 @@
     <fragment
         android:id="@+id/addRecipeIngredientInfoFragment"
         android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeIngredientInfoFragment"
-        android:label="Ingredient Info"
+        android:label="@string/title_ingredient_info"
 
         tools:layout="@layout/fragment_add_recipe_ingredient_info"/>
     <fragment
         android:id="@+id/addRecipeStepInfoFragment"
         android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeStepInfoFragment"
-        android:label="Step Info"
+        android:label="@string/title_step_info"
         tools:layout="@layout/fragment_add_recipe_steps_info"/>
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="ntu.platform.cookery.ui.fragment.recipe_details.RecipeDetailsFragment"
-        android:label="Recipe Details"
+        android:label="@string/title_recipe_details"
         tools:layout="@layout/fragment_recipe_details">
         <argument
             android:name="recipeId"

@@ -12,14 +12,15 @@ import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.BaseRecyclerViewHolder
 
 
-class RecipeAdapter2(
-    options: FirebaseRecyclerOptions<Recipe>
-): FirebaseRecyclerAdapter<Recipe, RecipeAdapter2.RecipeViewHolder>(options) {
+class FBRecipeAdapter(
+    options: FirebaseRecyclerOptions<Recipe>,
+    var clickedListener: BaseClickedListener? = null
+): FirebaseRecyclerAdapter<Recipe, FBRecipeAdapter.RecipeViewHolder>(options) {
     companion object{
         const val ACTION_ITEM_CLICK = 1001
     }
 
-    var clickedListener: BaseClickedListener? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val inflater = LayoutInflater.from(parent.context)

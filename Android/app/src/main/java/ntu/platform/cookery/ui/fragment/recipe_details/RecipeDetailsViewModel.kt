@@ -16,6 +16,7 @@ class RecipeDetailsViewModel(val recipeId: String): ViewModel() {
 
 
     init {
+        // TODO: to remove
         Log.d(TAG, "recipeId = $recipeId")
     }
 

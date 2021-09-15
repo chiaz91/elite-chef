@@ -41,7 +41,7 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
         initBinding()
         observeViewModel()
 
-        // TODO: pending only author can modify
+        // TODO: pending only author can modify if add authenticate
         setHasOptionsMenu(true)
     }
 

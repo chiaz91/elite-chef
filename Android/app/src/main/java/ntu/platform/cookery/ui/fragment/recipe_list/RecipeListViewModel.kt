@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.SingleLiveEvent
 import ntu.platform.cookery.data.firebase.FBRepository
-import ntu.platform.cookery.ui.adapter.RecipeAdapter2
+import ntu.platform.cookery.ui.adapter.FBRecipeAdapter
 
 private const val TAG = "Cy.VM.RecipeList"
 class RecipeListViewModel: ViewModel() {
@@ -14,7 +14,7 @@ class RecipeListViewModel: ViewModel() {
     val recipeClicked = SingleLiveEvent<String>()
 
 
-    val adapter =  RecipeAdapter2(options).also {
+    val adapter =  FBRecipeAdapter(options).also {
         it.clickedListener = BaseClickedListener { action, viewHolder ->
             Log.d(TAG, "$action, click on item ${viewHolder.bindingAdapterPosition}")
             val pos = viewHolder.bindingAdapterPosition
@@ -23,7 +23,6 @@ class RecipeListViewModel: ViewModel() {
             Log.d(TAG, "item key: ${it.getRef(pos).key}")
 
             recipeClicked.value = it.getRef(pos).key
-
         }
     }
 

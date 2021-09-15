@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.base.DIR_IMAGE_PICKER
 import ntu.platform.cookery.databinding.FragmentAddRecipeStepsInfoBinding
 import ntu.platform.cookery.data.firebase.FBStorageRepository
 import ntu.platform.cookery.util.loadWithGlide
@@ -36,6 +37,7 @@ class AddRecipeStepInfoFragment : BindingFragment<FragmentAddRecipeStepsInfoBind
         when (resultCode) {
             Activity.RESULT_OK -> {
                 val fileUri = data?.data!!
+                // TODO: change later if add authentication
                 FBStorageRepository.uploadRecipeGraphic("tester", fileUri).observe(viewLifecycleOwner,{
                     _viewModel.stepGraphic.value = it.toString()
                 })
@@ -88,7 +90,7 @@ class AddRecipeStepInfoFragment : BindingFragment<FragmentAddRecipeStepsInfoBind
         ImagePicker.with(this)
             .cropSquare()
             .maxResultSize(1080,1080)
-            .saveDir(File(requireContext().cacheDir, "ImagePicker"))
+            .saveDir(File(requireContext().cacheDir, DIR_IMAGE_PICKER))
             .createIntent { intent-> imageResultLauncher.launch(intent) }
     }
 

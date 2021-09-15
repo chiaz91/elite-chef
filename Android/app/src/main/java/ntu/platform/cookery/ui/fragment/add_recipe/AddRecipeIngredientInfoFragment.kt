@@ -1,7 +1,6 @@
 package ntu.platform.cookery.ui.fragment.add_recipe
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -61,11 +60,6 @@ class AddRecipeIngredientInfoFragment : BindingFragment<FragmentAddRecipeIngredi
     }
 
     private fun save(){
-        Log.d(TAG, "save clicked")
-        Log.d(TAG, "name=${_viewModel.ingredientName.value}")
-        Log.d(TAG, "amount=${_viewModel.ingredientAmount.value}")
-        Log.d(TAG, "unit=${_viewModel.ingredientUnit.value}")
-
         try{
             // TODO: validate data
             val name = _viewModel.ingredientName.value

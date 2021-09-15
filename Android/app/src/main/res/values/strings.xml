@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">fyp</string>
+    <string name="title_recipes">Recipes</string>
+    <string name="title_recipe_info">Recipe Info</string>
+    <string name="title_ingredient_list">Ingredients List</string>
+    <string name="title_step_list">Steps List</string>
+    <string name="title_ingredient_info">Ingredient Info</string>
+    <string name="title_step_info">Step Info</string>
+    <string name="title_recipe_details">Recipe Details</string>
     <string name="title_create_recipe">Create Recipe</string>
     <string name="title_edit_recipe">Edit Recipe</string>
     <string name="title_add_Ingredient">Add Ingredient</string>
@@ -44,5 +51,8 @@
     <string name="warn_deleting_recipe_message">Deleting of recipe cannot be undone.</string>
     <string name="warn_delete_ingredient_message">Deleting of ingredient cannot be undone</string>
     <string name="warn_delete_step_message">Deleting of step cannot be undone</string>
+    <string name="message_graphic_is_required">Graphic is required!</string>
+
+
 
 </resources>
