@@ -41,7 +41,8 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
             Activity.RESULT_OK -> {
                 val fileUri = data?.data!!
                 // TODO: change user_id after authenticate added
-                FBStorageRepository.uploadRecipeGraphic("tester", fileUri).observe(viewLifecycleOwner,{
+                val uid = _viewModel.user.value!!.uid
+                FBStorageRepository.uploadRecipeGraphic(uid, fileUri).observe(viewLifecycleOwner,{
                     _viewModel.graphic.value = it.toString()
                 })
             }

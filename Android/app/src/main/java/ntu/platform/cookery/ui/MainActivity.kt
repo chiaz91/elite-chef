@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        FBAuthRepository.userLiveData().observe(this, {
+        FBAuthRepository.userLiveData.observe(this, {
             if (it == null){
                 toLauncherActivity()
             }

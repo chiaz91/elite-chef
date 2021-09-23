@@ -37,8 +37,8 @@ class AddRecipeStepInfoFragment : BindingFragment<FragmentAddRecipeStepsInfoBind
         when (resultCode) {
             Activity.RESULT_OK -> {
                 val fileUri = data?.data!!
-                // TODO: change later if add authentication
-                FBStorageRepository.uploadRecipeGraphic("tester", fileUri).observe(viewLifecycleOwner,{
+                val uid = _viewModel.user.value!!.uid
+                FBStorageRepository.uploadRecipeGraphic(uid, fileUri).observe(viewLifecycleOwner,{
                     _viewModel.stepGraphic.value = it.toString()
                 })
             }
