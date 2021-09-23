@@ -1,21 +1,42 @@
 package ntu.platform.cookery.ui.fragment.launcher
 
+import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.IdpResponse
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.auth.FirebaseAuth
+import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.data.firebase.FBStorageRepository
 import ntu.platform.cookery.databinding.FragmentSplashBinding
 import ntu.platform.cookery.ui.MainActivity
 
+private const val TAG = "Cy.Launcher"
 class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
     override val bindingInflater: (LayoutInflater) -> FragmentSplashBinding
         get() = FragmentSplashBinding::inflate
 
     private val _viewModel: LauncherViewModel by viewModels()
+
+    private val authResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        val resultCode = result.resultCode
+        val data = result.data
+        val response = IdpResponse.fromResultIntent(data)
+        if (resultCode == Activity.RESULT_OK) {
+            Log.i(TAG, "Successfully signed in user " + "${FirebaseAuth.getInstance().currentUser?.displayName}!")
+        } else {
+            Log.i(TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
+        }
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,22 +46,46 @@ class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
 
 
         // subscribe changes in firebase, decide direct to login or main activity
+        observeAuthenticationState()
     }
 
-    override fun onStart() {
-        super.onStart()
 
-        // direct to main activity
-        binding.root.postDelayed({
-            toMainActivity();
-        }, 1000)
+    private fun launchSignInFlow() {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
+        )
+
+        val intentSignIn = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .setLogo(R.drawable.ic_launcher_foreground) // Set logo drawable
+            .setTheme(R.style.Theme_EC) // Set theme
+            .build()
+        authResultLauncher.launch(intentSignIn)
+    }
+
+    private fun observeAuthenticationState() {
+        _viewModel.authenticationState.observe(viewLifecycleOwner, { authenticationState ->
+            when (authenticationState) {
+                LauncherViewModel.AuthenticationState.AUTHENTICATED -> {
+                    toMainActivity()
+                }
+                else -> {Log.i(TAG, "user not authenticated.")
+                    binding.root.postDelayed({
+                        launchSignInFlow()
+                    }, 1500)
+                }
+            }
+        })
     }
 
 
 
     private fun toMainActivity(){
-        val intent = Intent(requireContext(), MainActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        val intent = Intent(requireContext(), MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
         startActivity(intent)
     }
 

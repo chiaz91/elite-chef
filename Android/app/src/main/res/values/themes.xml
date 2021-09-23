@@ -27,6 +27,13 @@
         <item name="android:fitsSystemWindows">true</item>
     </style>
 
+    <style name="Theme.EC.Login" parent="FirebaseUI">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/yellow</item>
+        <item name="android:windowBackground">@color/yellow</item>
+    </style>
+
 
 
     <style name="Widget.EC.Toolbar" parent="Widget.MaterialComponents.Toolbar">

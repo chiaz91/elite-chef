@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import ntu.platform.cookery.databinding.FragmentMainBinding
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.util.setTitle
 import ntu.platform.cookery.util.setToolBar
 
@@ -31,7 +32,6 @@ class RecipeListFragment: BindingFragment<FragmentMainBinding>() {
         binding.rvRecipes.adapter = _viewModel.adapter
 
         binding.fabAddRecipe.setOnClickListener{
-//            val action = RecipeListFragmentDirections.actionMainFragmentToAddRecipeInfoFragment()
             val action = RecipeListFragmentDirections.actionMainFragmentToAddRecipeInfoFragment(null)
             findNavController().navigate(action)
         }
