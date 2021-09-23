@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">fyp</string>
+    <string name="app_name">Elite Chefs</string>
     <string name="title_recipes">Recipes</string>
     <string name="title_recipe_info">Recipe Info</string>
     <string name="title_ingredient_list">Ingredients List</string>
