@@ -1,6 +1,7 @@
 package ntu.platform.cookery.ui.fragment.launcher
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -69,7 +70,9 @@ class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
         _viewModel.authenticationState.observe(viewLifecycleOwner, { authenticationState ->
             when (authenticationState) {
                 LauncherViewModel.AuthenticationState.AUTHENTICATED -> {
-                    toMainActivity()
+                    binding.root.postDelayed({
+                        toMainActivity()
+                    }, 1500)
                 }
                 else -> {Log.i(TAG, "user not authenticated.")
                     binding.root.postDelayed({
