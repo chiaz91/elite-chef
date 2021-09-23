@@ -46,7 +46,9 @@ object FBDatabaseRepository{
         val result = MutableLiveData<ECUser>()
         db.reference.child(REF_USERS).child(uid).get()
             .addOnSuccessListener {
-                result.value = it.getValue<ECUser>()
+                val user = it.getValue<ECUser>()!!
+                user.uid = uid
+                result.value = user
             }
             .addOnFailureListener{
                 Log.e(TAG, "getUser failed, err=${it.message}")
@@ -88,7 +90,10 @@ object FBDatabaseRepository{
         val result = MutableLiveData<Recipe>()
         db.reference.child(REF_RECIPES).child(recipeId).get()
             .addOnSuccessListener {
-                result.value = it.getValue<Recipe>()
+                val recipe =  it.getValue<Recipe>()!!.apply {
+                    key = recipeId
+                }
+                result.value = recipe
             }
             .addOnFailureListener{
                 Log.e(TAG, "getRecipe failed, err=${it.message}")
