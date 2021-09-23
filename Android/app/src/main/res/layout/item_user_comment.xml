@@ -65,6 +65,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/circularShape"
+            app:loadWithGlide="@{item.graphic}"
             app:strokeColor="@color/white"
             app:strokeWidth="1dp" />
 
