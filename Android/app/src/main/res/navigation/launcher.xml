@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/launcher.xml"
+    app:startDestination="@id/launcherFragment">
+
+
+    <fragment
+        android:id="@+id/launcherFragment"
+        android:name="ntu.platform.cookery.ui.fragment.launcher.LauncherFragment"
+        android:label="fragment_launcher"
+        tools:layout="@layout/fragment_splash" />
+</navigation>

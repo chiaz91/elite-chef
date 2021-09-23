@@ -26,7 +26,7 @@
     <string name="delete">Delete</string>
 
 
-   <string name="add">Add</string>
+    <string name="add">Add</string>
     <string name="add_more">Add More</string>
     <string name="recipe_graphic">Recipe graphic</string>
     <string name="step_info">Step Info</string>
