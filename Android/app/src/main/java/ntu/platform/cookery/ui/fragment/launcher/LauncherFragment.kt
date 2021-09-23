@@ -1,22 +1,22 @@
 package ntu.platform.cookery.ui.fragment.launcher
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.data.entity.ECUser
+import ntu.platform.cookery.data.firebase.FBAuthRepository
+import ntu.platform.cookery.data.firebase.FBRepository
 import ntu.platform.cookery.data.firebase.FBStorageRepository
 import ntu.platform.cookery.databinding.FragmentSplashBinding
 import ntu.platform.cookery.ui.MainActivity
@@ -33,7 +33,19 @@ class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
         val data = result.data
         val response = IdpResponse.fromResultIntent(data)
         if (resultCode == Activity.RESULT_OK) {
-            Log.i(TAG, "Successfully signed in user " + "${FirebaseAuth.getInstance().currentUser?.displayName}!")
+            Log.i(TAG, "Successfully signed in user ${FirebaseAuth.getInstance().currentUser?.displayName}!")
+            Log.i(TAG, "isNewUser= ${response?.isNewUser}!")
+            if (response?.isNewUser == true){
+                val user = FBAuthRepository.getUser()!!
+                val newUser = ECUser(
+                    name = user.displayName,
+                    bio ="",
+                    graphic =user.photoUrl?.toString(),
+                    uid =user.uid
+                )
+                FBRepository.saveUser(newUser)
+            }
+
         } else {
             Log.i(TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
         }
@@ -62,6 +74,8 @@ class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
             .setAvailableProviders(providers)
             .setLogo(R.drawable.ic_launcher_foreground) // Set logo drawable
             .setTheme(R.style.Theme_EC) // Set theme
+            .setAlwaysShowSignInMethodScreen(true)
+            .setIsSmartLockEnabled(false)
             .build()
         authResultLauncher.launch(intentSignIn)
     }

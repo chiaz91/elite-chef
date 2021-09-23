@@ -3,17 +3,13 @@ package ntu.platform.cookery.data.firebase
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.data.model.User
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
+import ntu.platform.cookery.data.entity.ECUser
 import ntu.platform.cookery.data.entity.Ingredient
 import ntu.platform.cookery.data.entity.Recipe
 import ntu.platform.cookery.data.entity.RecipeStep
@@ -36,6 +32,17 @@ object FBRepository{
 
         // TODO, test offline
         db.setPersistenceEnabled(true)
+    }
+
+    fun saveUser(user: ECUser) {
+        db.reference.child(REF_USERS).child(user.uid!!).setValue(user)
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    Log.d(TAG, "saveUser success")
+                } else {
+                    Log.d(TAG, "saveUser failed with ${it.exception!!.message}")
+                }
+            }
     }
 
 
