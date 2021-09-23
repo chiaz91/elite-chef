@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="item"
+            type="ntu.platform.cookery.data.entity.UserComment" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/message_card"
@@ -39,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
+                    android:text="@{item.name}"
                     tools:text="User Name" />
 
                 <TextView
@@ -46,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="11sp"
+                    android:text="@{item.message}"
                     tools:text="@string/test_desc" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -57,8 +61,7 @@
             android:layout_margin="5dp"
             android:background="@color/yellow"
             android:src="@drawable/ic_launcher_foreground"
-            android:translationZ="10dp"
-            app:elevation="200dp"
+            android:translationZ="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/circularShape"
@@ -73,7 +76,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@+id/message_card"
             app:layout_constraintTop_toBottomOf="@+id/message_card"
-            android:text="just now!" />
+            tools:text="" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

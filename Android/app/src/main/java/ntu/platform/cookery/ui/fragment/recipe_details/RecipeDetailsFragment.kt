@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
-import ntu.platform.cookery.data.firebase.FBRepository
+import ntu.platform.cookery.data.firebase.FBDatabaseRepository
 import ntu.platform.cookery.databinding.FragmentRecipeDetailsBinding
 import ntu.platform.cookery.util.log
 import ntu.platform.cookery.util.setDisplayHomeAsUp
@@ -51,6 +51,7 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
             viewModel = _viewModel
             rvIngredient.adapter = _viewModel.ingredientsAdapter
             rvSteps.adapter = _viewModel.stepsAdapter
+            rvComments.adapter = _viewModel.commentAdapter
         }
     }
 
@@ -110,11 +111,21 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
             .setTitle(getString(R.string.deletion))
             .setMessage(getString(R.string.warn_deleting_recipe_message))
             .setPositiveButton(getString(R.string.confirm)) { _, i ->
-                FBRepository.deleteRecipe(_viewModel.recipeId)
+                FBDatabaseRepository.deleteRecipe(_viewModel.recipeId)
                 findNavController().popBackStack()
             }
             .setNegativeButton(getString(R.string.cancel),null)
             .show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        _viewModel.commentAdapter.startListening()
+    }
+
+    override fun onStop() {
+        _viewModel.commentAdapter.stopListening()
+        super.onStop()
     }
 
 

@@ -9,16 +9,13 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import ntu.platform.cookery.data.entity.ECUser
-import ntu.platform.cookery.data.entity.Ingredient
-import ntu.platform.cookery.data.entity.Recipe
-import ntu.platform.cookery.data.entity.RecipeStep
+import ntu.platform.cookery.data.entity.*
 
 // firebase realtime database
 
 private const val TAG = "Cy.FB.Database"
 private const val LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif"
-object FBRepository{
+object FBDatabaseRepository{
     private lateinit var db: FirebaseDatabase
 
 
@@ -43,6 +40,18 @@ object FBRepository{
                     Log.d(TAG, "saveUser failed with ${it.exception!!.message}")
                 }
             }
+    }
+
+    fun getUser(uid: String): MutableLiveData<ECUser>{
+        val result = MutableLiveData<ECUser>()
+        db.reference.child(REF_USERS).child(uid).get()
+            .addOnSuccessListener {
+                result.value = it.getValue<ECUser>()
+            }
+            .addOnFailureListener{
+                Log.e(TAG, "getUser failed, err=${it.message}")
+            }
+        return result
     }
 
 
@@ -122,6 +131,27 @@ object FBRepository{
 
         return FirebaseRecyclerOptions.Builder<Recipe>()
             .setQuery(recipeRef, Recipe::class.java)
+            .build()
+    }
+
+    fun saveRecipeComment(recipeId: String, comment: UserComment){
+        val refComment = db.reference.child(REF_RECIPES_COMMENTS).child(recipeId).push()
+        comment.key = refComment.key
+        refComment.setValue(comment)
+            .addOnCompleteListener{
+                if (it.isSuccessful){
+                    Log.d(TAG, "saveUserComment success")
+                } else {
+                    Log.d(TAG, "saveUserComment failed with ${it.exception!!.message}")
+                }
+        }
+    }
+
+    fun getRecipeCommentOptions(recipeId: String): FirebaseRecyclerOptions<UserComment> {
+        val refComment = db.reference.child(REF_RECIPES_COMMENTS).child(recipeId)
+
+        return FirebaseRecyclerOptions.Builder<UserComment>()
+            .setQuery(refComment, UserComment::class.java)
             .build()
     }
 

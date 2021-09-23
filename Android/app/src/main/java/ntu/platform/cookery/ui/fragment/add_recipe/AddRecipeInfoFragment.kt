@@ -16,7 +16,7 @@ import ntu.platform.cookery.R
 import ntu.platform.cookery.databinding.FragmentAddRecipeInfoBinding
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.base.DIR_IMAGE_PICKER
-import ntu.platform.cookery.data.firebase.FBRepository
+import ntu.platform.cookery.data.firebase.FBDatabaseRepository
 import ntu.platform.cookery.data.firebase.FBStorageRepository
 import ntu.platform.cookery.util.setDisplayHomeAsUp
 import ntu.platform.cookery.util.setTitle
@@ -75,7 +75,7 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
     }
 
     private fun loadRecipeById(recipeId:String){
-        with(FBRepository){
+        with(FBDatabaseRepository){
             getRecipe(recipeId).observe(viewLifecycleOwner, {
                 _viewModel.setUpRecipe(it)
             })

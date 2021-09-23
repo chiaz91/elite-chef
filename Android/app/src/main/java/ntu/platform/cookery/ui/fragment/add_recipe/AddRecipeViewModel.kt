@@ -4,13 +4,12 @@ package ntu.platform.cookery.ui.fragment.add_recipe
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseUser
 import ntu.platform.cookery.base.MutableListLiveData
 import ntu.platform.cookery.data.entity.Ingredient
 import ntu.platform.cookery.data.entity.Recipe
 import ntu.platform.cookery.data.entity.RecipeStep
 import ntu.platform.cookery.data.firebase.FBAuthRepository
-import ntu.platform.cookery.data.firebase.FBRepository
+import ntu.platform.cookery.data.firebase.FBDatabaseRepository
 
 private const val TAG = "CY.VM.AddRecipe"
 class AddRecipeViewModel: ViewModel() {
@@ -81,9 +80,9 @@ class AddRecipeViewModel: ViewModel() {
             key = recipeId.value
         )
         // TODO: send out event?
-        val refRecipe = FBRepository.saveRecipe(recipe)
-        FBRepository.saveRecipeIngredients(refRecipe.key!!, ingredients.value!!)
-        FBRepository.saveRecipeSteps(refRecipe.key!!, steps.value!!)
+        val refRecipe = FBDatabaseRepository.saveRecipe(recipe)
+        FBDatabaseRepository.saveRecipeIngredients(refRecipe.key!!, ingredients.value!!)
+        FBDatabaseRepository.saveRecipeSteps(refRecipe.key!!, steps.value!!)
     }
 
     fun clearIngredientInfo(){

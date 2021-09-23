@@ -4,13 +4,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.SingleLiveEvent
-import ntu.platform.cookery.data.firebase.FBRepository
+import ntu.platform.cookery.data.firebase.FBDatabaseRepository
 import ntu.platform.cookery.ui.adapter.FBRecipeAdapter
 
 private const val TAG = "Cy.VM.RecipeList"
 class RecipeListViewModel: ViewModel() {
 
-    val options = FBRepository.getRecipeOptions()
+    val options = FBDatabaseRepository.getRecipeOptions()
     val recipeClicked = SingleLiveEvent<String>()
 
 

@@ -16,8 +16,7 @@ import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.data.entity.ECUser
 import ntu.platform.cookery.data.firebase.FBAuthRepository
-import ntu.platform.cookery.data.firebase.FBRepository
-import ntu.platform.cookery.data.firebase.FBStorageRepository
+import ntu.platform.cookery.data.firebase.FBDatabaseRepository
 import ntu.platform.cookery.databinding.FragmentSplashBinding
 import ntu.platform.cookery.ui.MainActivity
 
@@ -43,7 +42,7 @@ class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
                     graphic =user.photoUrl?.toString(),
                     uid =user.uid
                 )
-                FBRepository.saveUser(newUser)
+                FBDatabaseRepository.saveUser(newUser)
             }
 
         } else {
