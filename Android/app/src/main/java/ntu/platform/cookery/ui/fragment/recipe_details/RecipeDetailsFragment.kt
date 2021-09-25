@@ -42,7 +42,7 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
         observeViewModel()
 
         // TODO: pending only author can modify if add authenticate
-        setHasOptionsMenu(true)
+
     }
 
     private fun initBinding(){
@@ -56,6 +56,12 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
     }
 
     private fun observeViewModel(){
+        _viewModel.recipe.observe(viewLifecycleOwner, {
+            if (it.author == _viewModel.user.value!!.uid){
+                setHasOptionsMenu(true)
+            }
+        })
+
         _viewModel.ingredients.observe(viewLifecycleOwner, {
             _viewModel.ingredientsAdapter.items = it
             _viewModel.ingredientsAdapter.notifyDataSetChanged()
