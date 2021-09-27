@@ -2,10 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation.xml"
-    app:startDestination="@id/mainFragment">
+    android:id="@+id/nav_recipes"
+    app:startDestination="@id/newsfeed_list">
+
+    <!-- Recipes Related -->
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/recipe_list"
         android:name="ntu.platform.cookery.ui.fragment.recipe_list.RecipeListFragment"
         android:label="@string/title_recipes"
         tools:layout="@layout/fragment_main" >
@@ -57,9 +59,9 @@
         android:label="@string/title_step_list"
         tools:layout="@layout/fragment_add_recipe_steps">
         <action
-            android:id="@+id/action_addRecipeStepsFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:popUpTo="@id/mainFragment"
+            android:id="@+id/action_addRecipeStepsFragment_to_recipeListFragment"
+            app:destination="@id/recipe_list"
+            app:popUpTo="@id/recipe_list"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_addRecipeStepsFragment_to_addRecipeStepInfoFragment"
@@ -89,4 +91,18 @@
             app:destination="@id/addRecipeInfoFragment" />
     </fragment>
 
+
+
+
+    <fragment
+        android:id="@+id/newsfeed_list"
+        android:name="ntu.platform.cookery.ui.fragment.newsfeed.NewsfeedFragment"
+        android:label="@string/newsfeed"
+        tools:layout="@layout/fragment_newsfeed" />
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="ntu.platform.cookery.ui.fragment.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

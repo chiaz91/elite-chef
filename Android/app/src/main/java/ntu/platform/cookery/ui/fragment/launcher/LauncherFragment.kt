@@ -21,6 +21,7 @@ import ntu.platform.cookery.databinding.FragmentSplashBinding
 import ntu.platform.cookery.ui.MainActivity
 
 private const val TAG = "Cy.Launcher"
+private const val DELAY_MS = 1000L
 class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
     override val bindingInflater: (LayoutInflater) -> FragmentSplashBinding
         get() = FragmentSplashBinding::inflate
@@ -85,12 +86,12 @@ class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
                 LauncherViewModel.AuthenticationState.AUTHENTICATED -> {
                     binding.root.postDelayed({
                         toMainActivity()
-                    }, 1500)
+                    }, DELAY_MS)
                 }
                 else -> {Log.i(TAG, "user not authenticated.")
                     binding.root.postDelayed({
                         launchSignInFlow()
-                    }, 1500)
+                    }, DELAY_MS)
                 }
             }
         })

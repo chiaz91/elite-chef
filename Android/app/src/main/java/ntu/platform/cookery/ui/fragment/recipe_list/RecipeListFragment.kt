@@ -3,20 +3,17 @@ package ntu.platform.cookery.ui.fragment.recipe_list
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import ntu.platform.cookery.databinding.FragmentMainBinding
 import ntu.platform.cookery.base.BindingFragment
-import ntu.platform.cookery.data.firebase.FBAuthRepository
+import ntu.platform.cookery.databinding.FragmentRecipeListBinding
 import ntu.platform.cookery.util.setTitle
 import ntu.platform.cookery.util.setToolBar
 
 
-class RecipeListFragment: BindingFragment<FragmentMainBinding>() {
-    override val bindingInflater: (LayoutInflater) -> FragmentMainBinding
-        get() = FragmentMainBinding::inflate
+class RecipeListFragment: BindingFragment<FragmentRecipeListBinding>() {
+    override val bindingInflater: (LayoutInflater) -> FragmentRecipeListBinding
+        get() = FragmentRecipeListBinding::inflate
 
     private val _viewModel: RecipeListViewModel by viewModels()
 

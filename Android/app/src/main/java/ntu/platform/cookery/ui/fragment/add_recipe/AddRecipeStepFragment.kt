@@ -93,7 +93,8 @@ class AddRecipeStepFragment : BindingFragment<FragmentAddRecipeStepsBinding>() {
     private fun doSave(){
         _viewModel.saveRecipe()
 
-        val action = AddRecipeStepFragmentDirections.actionAddRecipeStepsFragmentToMainFragment()
+
+        val action = AddRecipeStepFragmentDirections.actionAddRecipeStepsFragmentToRecipeListFragment()
         findNavController().navigate(action)
     }
 

@@ -12,6 +12,8 @@
     <string name="title_add_Ingredient">Add Ingredient</string>
     <string name="title_add_step">Add Step</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="newsfeed">Newsfeed</string>
+    <string name="profile">Profile</string>
 
     <string name="step_count">Step %d</string>
 
@@ -59,6 +61,5 @@
     <string name="rest_time">Rest Time</string>
     <string name="rest_time_helper">Duration for the dish to be rest aside.</string>
     <string name="suffix_minutes">mins</string>
-
-
+    <string name="action_settings">Settings</string>
 </resources>

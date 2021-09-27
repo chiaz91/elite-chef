@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -23,7 +24,10 @@ fun Fragment.setToolBar(toolbar: Toolbar){
     if (activity is AppCompatActivity){
         (activity as AppCompatActivity).apply{
             setSupportActionBar(toolbar)
-            NavigationUI.setupActionBarWithNavController(this, findNavController())
+//            NavigationUI.setupActionBarWithNavController(this, findNavController())
+            val appBarConfiguration = AppBarConfiguration(setOf(R.id.newsfeed_list,R.id.recipe_list, R.id.profile))
+
+            NavigationUI.setupActionBarWithNavController(this, findNavController(), appBarConfiguration)
         }
     }
 }

@@ -1,6 +1,6 @@
 <resources>
     <!--  Messages here only for debug!! -->
-    <string name="test_msg">this is a sample text represent the recipe description, it supposed to be long enough to show multi-lines. the longer the better </string>
+    <string name="test_msg">this is a sample text for general long description, it supposed to be long enough to show multi-lines. the longer the better </string>
     <string name="test_desc">Pound 2 stalks of lemongrass and cut into 3 cm/ 1 inch pieces. Add water, salt, chilli, half of the garlic, lemongrass, and the chicken into a pot over medium heat. Bring to the boil. Then reduce the heat. Simmer without the lid for 20 min. until the chicken is cooked. Remove the chicken from the pot. Set aside and let cool</string>
 
 </resources>

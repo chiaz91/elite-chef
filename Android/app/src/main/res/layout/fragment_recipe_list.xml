@@ -16,13 +16,10 @@
         tools:context=".ui.fragment.recipe_list.RecipeListFragment"
         >
 
-        <include
-            android:id="@+id/toolbar_layout"
+        <include android:id="@+id/toolbar_layout"
             layout="@layout/tool_bar"/>
 
 
-
-        <!--            app:liveData="@{viewModel.recipes}"-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRecipes"
             android:layout_width="match_parent"
