@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+                val navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity)
                 navController.popBackStack()
                 return true
             }

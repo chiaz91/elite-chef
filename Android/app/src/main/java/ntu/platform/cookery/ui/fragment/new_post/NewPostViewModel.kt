@@ -21,15 +21,21 @@ class NewPostViewModel : ViewModel() {
 
     fun save(){
         val post = Post(
-                message = message.value,
-                graphic = graphic.value,
-                timeCreated = Date().time,
-                user = user.value
+            message = message.value,
+            graphic = graphic.value,
+            timeCreated = Date().time,
+            user = user.value,
+            userId = user.value!!.uid
         )
 
         FBDatabaseRepository.savePost(post)
     }
 
 
+
+    fun clear(){
+        message.value = ""
+        graphic.value = null
+    }
 
 }

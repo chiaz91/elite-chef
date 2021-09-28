@@ -110,4 +110,9 @@ class NewPostFragment : BindingFragment<FragmentNewPostBinding>() {
         }
     }
 
+    override fun onDestroy() {
+        _viewModel.clear()
+        super.onDestroy()
+    }
+
 }

@@ -40,6 +40,7 @@ class FBPostsAdapter(
             itemView.setOnClickListener{
                 clickedListener?.onClick(ACTION_ITEM_CLICK, this)
             }
+            itemView.tag = post;
         }
     }
 

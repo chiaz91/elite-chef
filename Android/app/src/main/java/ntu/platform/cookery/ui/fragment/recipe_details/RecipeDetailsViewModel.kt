@@ -38,9 +38,10 @@ class RecipeDetailsViewModel(val recipeId: String): ViewModel() {
             val comment = UserComment(
                 message = input,
                 timeCreated = Date().time,
-                name = user.value!!.name,
-                graphic = user.value!!.graphic,
+//                name = user.value!!.name,
+//                graphic = user.value!!.graphic,
                 uid = user.value!!.uid,
+                user = user.value!!
             )
             FBDatabaseRepository.saveRecipeComment(recipeId, comment)
             message.value = ""

@@ -1,7 +1,10 @@
 package ntu.platform.cookery.data.entity
 
+import android.os.Parcelable
 import com.google.firebase.database.Exclude
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Recipe(
     var name:String? = null,
     var description: String? = null,
@@ -11,7 +14,7 @@ data class Recipe(
     var timeRestMin: Int = 0,
     var author: String? = null,
     @get:Exclude var key: String? = null,
-){
+): Parcelable{
 
     fun totalTime() = timePrepareMin+timeBakingMin+timeRestMin
 }

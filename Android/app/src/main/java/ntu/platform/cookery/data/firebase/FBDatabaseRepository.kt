@@ -1,6 +1,5 @@
 package ntu.platform.cookery.data.firebase
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.firebase.ui.auth.data.model.User
@@ -185,6 +184,27 @@ object FBDatabaseRepository{
         return FirebaseRecyclerOptions.Builder<Post>()
                 .setQuery(refPosts, Post::class.java)
                 .build()
+    }
+
+    fun savePostComments(postId: String, comment: UserComment){
+        val refComment = db.reference.child(REF_POSTS_COMMENTS).child(postId).push()
+        comment.key = refComment.key
+        refComment.setValue(comment)
+            .addOnCompleteListener{
+                if (it.isSuccessful){
+                    Log.d(TAG, "saveUserComment success")
+                } else {
+                    Log.d(TAG, "saveUserComment failed with ${it.exception!!.message}")
+                }
+            }
+    }
+
+    fun getPostCommentsOptions(postId: String): FirebaseRecyclerOptions<UserComment>{
+        val refComment = db.reference.child(REF_POSTS_COMMENTS).child(postId)
+
+        return FirebaseRecyclerOptions.Builder<UserComment>()
+            .setQuery(refComment, UserComment::class.java)
+            .build()
     }
 
 
