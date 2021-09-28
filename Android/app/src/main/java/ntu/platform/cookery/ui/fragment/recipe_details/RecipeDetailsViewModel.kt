@@ -13,7 +13,7 @@ import java.util.*
 
 private const val TAG = "CY.VM.RecipeDetail"
 class RecipeDetailsViewModel(val recipeId: String): ViewModel() {
-    var user = FBDatabaseRepository.getUser(FBAuthRepository.getUser()!!.uid)
+    var user = FBDatabaseRepository.getUser()
     var recipe = FBDatabaseRepository.getRecipe(recipeId)
     var ingredients = FBDatabaseRepository.getRecipeIngredients(recipeId)
     var steps = FBDatabaseRepository.getRecipeSteps(recipeId)

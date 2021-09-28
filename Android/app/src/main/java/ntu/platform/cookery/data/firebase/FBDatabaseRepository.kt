@@ -42,7 +42,7 @@ object FBDatabaseRepository{
             }
     }
 
-    fun getUser(uid: String): MutableLiveData<ECUser>{
+    fun getUser(uid: String = FBAuthRepository.getUser()!!.uid): MutableLiveData<ECUser>{
         val result = MutableLiveData<ECUser>()
         db.reference.child(REF_USERS).child(uid).get()
             .addOnSuccessListener {
@@ -159,6 +159,35 @@ object FBDatabaseRepository{
             .setQuery(refComment, UserComment::class.java)
             .build()
     }
+
+    // Newsfeed
+    fun savePost(post: Post){
+        val refRoot = db.reference.child(REF_POSTS)
+        val refPosts = when{
+            post.key != null -> refRoot.child(post.key!!)
+            else -> refRoot.push()
+        }
+        Log.d(TAG, "savePost.key=${refPosts.key}")
+        refPosts.setValue(post)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Log.d(TAG, "savePost success")
+                } else {
+                    Log.d(TAG, "savePost failed with ${it.exception!!.message}")
+                }
+            }
+
+    }
+
+    fun getAllPostOptions(): FirebaseRecyclerOptions<Post>{
+        val refPosts = db.reference.child(REF_POSTS)
+
+        return FirebaseRecyclerOptions.Builder<Post>()
+                .setQuery(refPosts, Post::class.java)
+                .build()
+    }
+
+
 
 
 

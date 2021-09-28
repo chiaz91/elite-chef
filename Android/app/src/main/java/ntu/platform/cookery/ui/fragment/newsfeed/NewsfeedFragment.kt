@@ -23,10 +23,28 @@ class NewsfeedFragment : BindingFragment<FragmentNewsfeedBinding>() {
     }
 
     private fun initBinding(){
-        binding.fabAdd.setOnClickListener{
-            val action = NewsfeedFragmentDirections.actionNewsfeedListToNewPostFragment()
-            findNavController().navigate(action)
+        with(binding){
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = _viewModel
+
+            fabAdd.setOnClickListener{
+                val action = NewsfeedFragmentDirections.actionNewsfeedListToNewPostFragment()
+                findNavController().navigate(action)
+            }
+
+            rvPosts.adapter = _viewModel.adapter
         }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        _viewModel.adapter.startListening()
+    }
+
+    override fun onStop() {
+        _viewModel.adapter.stopListening()
+        super.onStop()
     }
 
 

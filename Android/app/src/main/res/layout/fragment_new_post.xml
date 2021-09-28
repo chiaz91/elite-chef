@@ -1,105 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.newsfeed.NewsfeedFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include android:id="@+id/toolbar_layout" layout="@layout/tool_bar" />
+    <data>
 
-    <androidx.core.widget.NestedScrollView
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="ntu.platform.cookery.ui.fragment.new_post.NewPostViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginBottom="?attr/actionBarSize"
-        android:overScrollMode="never">
+        tools:context=".ui.fragment.newsfeed.NewsfeedFragment">
+
+        <include
+            android:id="@+id/toolbar_layout"
+            layout="@layout/tool_bar" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_marginBottom="?attr/actionBarSize"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/margin_normal"
+                android:paddingEnd="@dimen/margin_normal">
+
+                <TextView
+                    android:id="@+id/greeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    tools:text="Hi User," />
+
+                <EditText
+                    android:id="@+id/message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:background="@null"
+                    android:hint="Want to share anything?"
+                    android:text="@={viewModel.message}"/>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:visibility="@{viewModel.graphic!=null?View.VISIBLE:View.GONE}"
+                    >
+
+                    <!-- android:visibility="@{item.graphic!=null?View.VISIBLE:View.GONE}"-->
+                    <ImageView
+                        android:id="@+id/graphic"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loadWithGlide="@{viewModel.graphic}"/>
+
+                    <ImageButton
+                        android:id="@+id/btn_cross"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?selectableItemBackgroundBorderless"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_cross" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/margin_normal"
-            android:paddingEnd="@dimen/margin_normal">
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
 
-            <TextView
-                android:id="@+id/greeting"
+            <ImageButton
+                android:id="@+id/btn_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                tools:text="Hi User," />
+                android:src="@drawable/ic_camera"
+                android:padding="10dp"
+                android:background="?selectableItemBackgroundBorderless" />
 
-            <EditText
-                android:id="@+id/message"
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/btn_gallery"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:background="@null"
-                android:hint="Want to share anything?"
-                />
+                android:src="@drawable/ic_gallery"
+                android:padding="10dp"
+                android:layout_marginStart="20dp"
+                android:background="?selectableItemBackgroundBorderless" />
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp">
-
-                <!-- android:visibility="@{item.graphic!=null?View.VISIBLE:View.GONE}"-->
-                <ImageView
-                    android:id="@+id/graphic"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="H,1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-
-                <ImageButton
-                    android:id="@+id/btn_cross"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackgroundBorderless"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_cross"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom">
-        <ImageButton
-            android:id="@+id/btn_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_camera"
-            android:padding="10dp"
-            android:background="?selectableItemBackgroundBorderless"
-            />
-
-        <ImageButton
-            android:id="@+id/btn_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_gallery"
-            android:padding="10dp"
-            android:layout_marginStart="20dp"
-            android:background="?selectableItemBackgroundBorderless"
-            />
-
-
-    </LinearLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

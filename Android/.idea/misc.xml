@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_add_recipe_ingredient.xml" value="0.1484375" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_add_recipe_ingredient_info.xml" value="0.1484375" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_new_post.xml" value="0.33" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_newsfeed.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_recipe_details.xml" value="0.11525867714472822" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_newsfeed.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_step_large.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_user_comment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/tool_bar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/menu/post.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/chiayu/Documents/projects/git/fyp/Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/chiayu/Documents/projects/git/fyp/Android/app/src/main/res/drawable/heart.xml" value="0.2703125" />
         <entry key="..\:/Users/chiayu/Documents/projects/git/fyp/Android/app/src/main/res/drawable/heart_outline.xml" value="0.28229166666666666" />
