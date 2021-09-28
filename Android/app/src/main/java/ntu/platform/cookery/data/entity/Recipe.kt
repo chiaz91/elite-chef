@@ -12,9 +12,10 @@ data class Recipe(
     var timePrepareMin: Int = 0,
     var timeBakingMin: Int = 0,
     var timeRestMin: Int = 0,
-    var author: String? = null,
+    var timeCreated: Long?=null,
+    var authorId: String? = null,
+    var author: ECUser? = null,
     @get:Exclude var key: String? = null,
 ): Parcelable{
-
     fun totalTime() = timePrepareMin+timeBakingMin+timeRestMin
 }

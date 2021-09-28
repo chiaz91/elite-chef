@@ -35,6 +35,7 @@
                 android:background="@color/yellow"
                 android:src="@drawable/ic_launcher_foreground"
                 android:translationZ="5dp"
+                app:loadWithGlide="@{item.user.graphic}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/circularShape"
@@ -59,7 +60,8 @@
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@+id/name"
                 app:layout_constraintTop_toBottomOf="@+id/name"
-                tools:text="Just now" />
+                tools:text="Just now"
+                app:timeAgo="@{item.timeCreated}"/>
 
 
             <TextView

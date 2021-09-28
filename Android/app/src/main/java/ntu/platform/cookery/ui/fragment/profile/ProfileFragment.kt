@@ -1,11 +1,14 @@
 package ntu.platform.cookery.ui.fragment.profile
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.databinding.FragmentProfileBinding
+import ntu.platform.cookery.ui.fragment.recipe_details.RecipeDetailsFragmentDirections
 import ntu.platform.cookery.util.setToolBar
 
 class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
@@ -20,6 +23,24 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
 
         initBinding()
         observeViewModel()
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.profile, menu);
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_logout -> {
+                FBAuthRepository.logout()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun initBinding() {

@@ -1,10 +1,12 @@
 package ntu.platform.cookery.util
 
 import android.net.Uri
+import android.text.format.DateUtils
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
@@ -68,5 +70,10 @@ object BindingAdapter{
             )
         )
 
+    @JvmStatic
+    @BindingAdapter( "timeAgo")
+    fun TextView.relativeTimestamp( time: Long){
+        text = DateUtils.getRelativeTimeSpanString(time)
+    }
 
 }

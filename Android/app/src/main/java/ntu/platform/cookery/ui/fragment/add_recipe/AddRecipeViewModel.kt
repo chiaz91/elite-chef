@@ -10,11 +10,13 @@ import ntu.platform.cookery.data.entity.Recipe
 import ntu.platform.cookery.data.entity.RecipeStep
 import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.data.firebase.FBDatabaseRepository
+import java.util.*
 
 private const val TAG = "CY.VM.AddRecipe"
 class AddRecipeViewModel: ViewModel() {
-    val user = FBAuthRepository.userLiveData
+    val user = FBDatabaseRepository.getUser()
     val recipeId = MutableLiveData<String?>()
+    val timeCreated = MutableLiveData<Long?>()
 
     // recipe info
     val name = MutableLiveData<String?>()
@@ -45,6 +47,7 @@ class AddRecipeViewModel: ViewModel() {
         timePrepare.value = recipe.timePrepareMin.toString()
         timeBake.value = recipe.timeBakingMin.toString()
         timeRest.value = recipe.timeRestMin.toString()
+        timeCreated.value = recipe.timeCreated
     }
     fun setUpIngredients(ingredients: List<Ingredient>){
         this.ingredients.clear()
@@ -76,7 +79,9 @@ class AddRecipeViewModel: ViewModel() {
             timePrepareMin = Integer.parseInt(timePrepare.value?.toString() ?: "0"),
             timeBakingMin = Integer.parseInt(timeBake.value?.toString() ?: "0"),
             timeRestMin = Integer.parseInt(timeRest.value?.toString() ?: "0"),
-            author = user.value!!.uid,
+            timeCreated = timeCreated.value?: Date().time,
+            authorId = user.value!!.uid,
+            author = user.value!!,
             key = recipeId.value
         )
         // TODO: send out event?

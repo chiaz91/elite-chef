@@ -37,7 +37,7 @@ class AddRecipeStepInfoFragment : BindingFragment<FragmentAddRecipeStepsInfoBind
         when (resultCode) {
             Activity.RESULT_OK -> {
                 val fileUri = data?.data!!
-                val uid = _viewModel.user.value!!.uid
+                val uid = _viewModel.user.value!!.uid!!
                 FBStorageRepository.uploadRecipeGraphic(uid, fileUri).observe(viewLifecycleOwner,{
                     _viewModel.stepGraphic.value = it.toString()
                 })
