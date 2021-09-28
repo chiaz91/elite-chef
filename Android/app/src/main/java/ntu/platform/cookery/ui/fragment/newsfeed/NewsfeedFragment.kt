@@ -3,39 +3,31 @@ package ntu.platform.cookery.ui.fragment.newsfeed
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.databinding.FragmentNewsfeedBinding
 import ntu.platform.cookery.util.setToolBar
 
-class NewsfeedFragment : Fragment() {
-    private lateinit var dashboardViewModel: NewsfeedViewModel
-    private var _binding: FragmentNewsfeedBinding? = null
+class NewsfeedFragment : BindingFragment<FragmentNewsfeedBinding>() {
+    override val bindingInflater: (LayoutInflater) -> FragmentNewsfeedBinding
+        get() = FragmentNewsfeedBinding::inflate
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private  val _viewModel: NewsfeedViewModel  by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        dashboardViewModel = ViewModelProvider(this).get(NewsfeedViewModel::class.java)
-
-        _binding = FragmentNewsfeedBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setToolBar(binding.toolbarLayout.toolbar)
-
-        return root
+        initBinding()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun initBinding(){
+        binding.fabAdd.setOnClickListener{
+            val action = NewsfeedFragmentDirections.actionNewsfeedListToNewPostFragment()
+            findNavController().navigate(action)
+        }
     }
+
+
 }
