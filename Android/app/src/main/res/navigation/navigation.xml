@@ -128,7 +128,20 @@
         android:id="@+id/profile"
         android:name="ntu.platform.cookery.ui.fragment.profile.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="ntu.platform.cookery.ui.fragment.profile_edit.ProfileEditFragment"
+        android:label="ProfileEditFragment"
+        tools:layout="@layout/fragment_profile_edit">
+        <argument
+            android:name="user"
+            app:argType="ntu.platform.cookery.data.entity.ECUser" />
+    </fragment>
 
 
 </navigation>

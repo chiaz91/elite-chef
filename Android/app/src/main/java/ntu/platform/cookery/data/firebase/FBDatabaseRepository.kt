@@ -43,15 +43,29 @@ object FBDatabaseRepository{
 
     fun getUser(uid: String = FBAuthRepository.getUser()!!.uid): MutableLiveData<ECUser>{
         val result = MutableLiveData<ECUser>()
-        db.reference.child(REF_USERS).child(uid).get()
-            .addOnSuccessListener {
-                val user = it.getValue<ECUser>()!!
-                user.uid = uid
-                result.value = user
+//        db.reference.child(REF_USERS).child(uid).get()
+//            .addOnSuccessListener {
+//                val user = it.getValue<ECUser>()!!
+//                user.uid = uid
+//                result.value = user
+//            }
+//            .addOnFailureListener{
+//                Log.e(TAG, "getUser failed, err=${it.message}")
+//            }
+        db.reference.child(REF_USERS).child(uid).addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val user = snapshot.getValue<ECUser>()
+                user?.let {
+                    it.uid = uid
+                    result.value = it
+                }
             }
-            .addOnFailureListener{
-                Log.e(TAG, "getUser failed, err=${it.message}")
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "getRecipe failed, err=${error.message}")
             }
+
+        })
         return result
     }
 

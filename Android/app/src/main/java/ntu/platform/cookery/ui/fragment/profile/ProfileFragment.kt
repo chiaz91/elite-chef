@@ -34,6 +34,12 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
+            R.id.action_edit -> {
+                val action = ProfileFragmentDirections.actionProfileToProfileEditFragment(_viewModel.user.value!!)
+                findNavController().navigate(action)
+                true
+            }
+
             R.id.action_logout -> {
                 FBAuthRepository.logout()
                 true
@@ -44,12 +50,17 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
     }
 
     private fun initBinding() {
-        setToolBar(binding.toolbarLayout.toolbar)
+        with(binding){
+
+            setToolBar(toolbarLayout.toolbar)
+            binding.lifecycleOwner = viewLifecycleOwner
+            binding.viewModel = _viewModel
+        }
     }
 
     private fun observeViewModel(){
-        _viewModel.text.observe(viewLifecycleOwner, {
-            binding.text.text = it
-        })
+//        _viewModel.text.observe(viewLifecycleOwner, {
+//            binding.text.text = it
+//        })
     }
 }
