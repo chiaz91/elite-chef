@@ -1,10 +1,12 @@
 package ntu.platform.cookery.ui.fragment.post_comments
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.databinding.FragmentPostCommentsBinding
@@ -42,15 +44,27 @@ class PostCommentsFragment:  BindingFragment<FragmentPostCommentsBinding>() {
             viewModel = _viewModel
             setToolBar(toolbarLayout.toolbar)
             cardPost.item = _viewModel.post
+            cardPost.profilePic.setOnClickListener{
+                val post = _viewModel.post
+                val user = post.user!!.also {
+                    it.uid = post.userId
+                }
+                Log.d(TAG, "onProfileClicked:: ${user.uid}=${user.name}")
+            }
             rvComments.adapter = _viewModel.commentAdapter
 
         }
     }
 
     private fun observeViewModel(){
-//        _viewModel.text.observe(viewLifecycleOwner, {
-//
-//        })
+        with(_viewModel){
+            onProfileClick.observe(viewLifecycleOwner, { user ->
+                Log.d(TAG, "onProfileClicked:: ${user.uid}=${user.name}")
+//                val uid = user.uid
+//                val action = PostCommentsFragmentDirections.actionPostCommentsFragmentToProfile(uid)
+//                findNavController().navigate(action)
+            })
+        }
     }
 
 

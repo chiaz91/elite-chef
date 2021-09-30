@@ -3,6 +3,9 @@ package ntu.platform.cookery.ui.fragment.recipe_details
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ntu.platform.cookery.base.BaseClickedListener
+import ntu.platform.cookery.base.SingleLiveEvent
+import ntu.platform.cookery.data.entity.ECUser
 import ntu.platform.cookery.data.entity.UserComment
 import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.data.firebase.FBDatabaseRepository
@@ -20,11 +23,24 @@ class RecipeDetailsViewModel(val recipeId: String): ViewModel() {
     var ingredientsAdapter = RecipeIngredientAdapter()
     var stepsAdapter = RecipeStepLargePicAdapter()
 
+    val onProfileClick = SingleLiveEvent<ECUser>()
 
 
     val message = MutableLiveData<String?>()
     val commentOption = FBDatabaseRepository.getRecipeCommentOptions(recipeId)
-    val commentAdapter = FBUserCommentAdapter(options = commentOption)
+    val commentAdapter = FBUserCommentAdapter(options = commentOption).also {
+        it.clickedListener = BaseClickedListener{action, holder->
+            val pos = holder.bindingAdapterPosition
+            val comment = it.getItem(pos).apply {
+                key = it.getRef(pos).key
+                user?.uid = uid
+            }
+
+            if (action == FBUserCommentAdapter.ACTION_PROFILE_CLICK){
+                onProfileClick.value = comment.user!!
+            }
+        }
+    }
 
     init {
         // TODO: to remove

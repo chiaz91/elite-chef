@@ -56,6 +56,7 @@
 
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_pic"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="5dp"

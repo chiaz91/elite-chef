@@ -18,6 +18,7 @@ class FBPostsAdapter(
 ): FirebaseRecyclerAdapter<Post, FBPostsAdapter.PostViewHolder>(options) {
     companion object{
         const val ACTION_ITEM_CLICK = 1001
+        const val ACTION_PROFILE_CLICK = 1002
     }
 
 
@@ -37,10 +38,15 @@ class FBPostsAdapter(
     class PostViewHolder(binding: ViewDataBinding) : BaseRecyclerViewHolder(binding){
         fun bindAs(post: Post, clickedListener: BaseClickedListener?){
             binding.setVariable(BR.item, post)
+            itemView.tag = post;
             itemView.setOnClickListener{
                 clickedListener?.onClick(ACTION_ITEM_CLICK, this)
             }
-            itemView.tag = post;
+            if (binding is ItemNewsfeedBinding){
+                binding.profilePic.setOnClickListener{
+                    clickedListener?.onClick(ACTION_PROFILE_CLICK, this)
+                }
+            }
         }
     }
 

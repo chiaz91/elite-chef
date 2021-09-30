@@ -18,6 +18,7 @@ class FBUserCommentAdapter(
 ): FirebaseRecyclerAdapter<UserComment, FBUserCommentAdapter.CommentViewHolder>(options) {
     companion object{
         const val ACTION_ITEM_CLICK = 1001
+        const val ACTION_PROFILE_CLICK = 1002
     }
 
 
@@ -37,8 +38,14 @@ class FBUserCommentAdapter(
     class CommentViewHolder(binding: ViewDataBinding) : BaseRecyclerViewHolder(binding){
         fun bindAs(recipe: UserComment, clickedListener: BaseClickedListener?){
             binding.setVariable(BR.item, recipe)
+            itemView.tag = recipe
             itemView.setOnClickListener{
                 clickedListener?.onClick(ACTION_ITEM_CLICK, this)
+            }
+            if (binding is ItemUserCommentBinding){
+                binding.profilePic.setOnClickListener{
+                    clickedListener?.onClick(ACTION_PROFILE_CLICK, this)
+                }
             }
         }
     }

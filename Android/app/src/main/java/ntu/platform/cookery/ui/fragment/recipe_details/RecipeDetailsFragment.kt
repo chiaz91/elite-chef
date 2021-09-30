@@ -56,27 +56,33 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
     }
 
     private fun observeViewModel(){
-        _viewModel.recipe.observe(viewLifecycleOwner, {
-            if (it.authorId == _viewModel.user.value!!.uid!!){
-                setHasOptionsMenu(true)
-            }
-        })
+        with(_viewModel){
+            onProfileClick.observe(viewLifecycleOwner, {
+                Log.d(TAG, "profileClicked::${it.uid}=${it.name}")
+            })
 
-        _viewModel.ingredients.observe(viewLifecycleOwner, {
-            _viewModel.ingredientsAdapter.items = it
-            _viewModel.ingredientsAdapter.notifyDataSetChanged()
+            recipe.observe(viewLifecycleOwner, {
+                if (it.authorId == _viewModel.user.value!!.uid!!){
+                    setHasOptionsMenu(true)
+                }
+            })
 
-            // TODO: remove below
-            it.log()
-        })
+            ingredients.observe(viewLifecycleOwner, {
+                _viewModel.ingredientsAdapter.items = it
+                _viewModel.ingredientsAdapter.notifyDataSetChanged()
 
-        _viewModel.steps.observe(viewLifecycleOwner, {
-            _viewModel.stepsAdapter.items = it
-            _viewModel.stepsAdapter.notifyDataSetChanged()
+                // TODO: remove below
+                it.log()
+            })
 
-            // TODO: remove below
-            it.log()
-        })
+            steps.observe(viewLifecycleOwner, {
+                _viewModel.stepsAdapter.items = it
+                _viewModel.stepsAdapter.notifyDataSetChanged()
+
+                // TODO: remove below
+                it.log()
+            })
+        }
     }
 
 //    override fun onStart() {

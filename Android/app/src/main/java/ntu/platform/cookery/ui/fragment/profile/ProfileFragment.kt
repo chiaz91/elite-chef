@@ -3,16 +3,13 @@ package ntu.platform.cookery.ui.fragment.profile
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.databinding.FragmentProfileBinding
-import ntu.platform.cookery.ui.fragment.profile_edit.ProfileEditViewModel
 import ntu.platform.cookery.util.setToolBar
 
 private const val TAG = "Cy.profile"
@@ -26,12 +23,14 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
         super.onCreate(savedInstanceState)
 
 
-        val args by navArgs<ProfileFragmentArgs>()
-        var uid = args.userId ?: FBAuthRepository.getUser()!!.uid
+//        val args by navArgs<ProfileFragmentArgs>()
+//        var uid = args.userId ?: FBAuthRepository.getUser()!!.uid
+//
+//        Log.d(TAG, "arg.uid=${args.userId}")
 
-        Log.d(TAG, "arg.uid=${args.userId}")
-        val vmFactory = ProfileViewModelFactory(uid)
+        val vmFactory = ProfileViewModelFactory(FBAuthRepository.getUser()!!.uid)
         _viewModel = ViewModelProvider(this, vmFactory).get(ProfileViewModel::class.java)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
