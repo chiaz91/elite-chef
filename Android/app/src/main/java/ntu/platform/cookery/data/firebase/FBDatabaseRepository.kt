@@ -69,6 +69,8 @@ object FBDatabaseRepository{
         return result
     }
 
+
+    // User Follow
     fun hasFollowUser(followingUserId: String, userId: String? = FBAuthRepository.getUser()!!.uid): MutableLiveData<Boolean>{
         val result = MutableLiveData<Boolean>(false)
         db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUserId)
@@ -85,7 +87,6 @@ object FBDatabaseRepository{
         return result
     }
 
-    // User Follow
     fun followUser(followingUser: ECUser, userId: String? = FBAuthRepository.getUser()!!.uid){
         db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUser.uid!!).setValue(followingUser)
             .addOnSuccessListener {
@@ -98,6 +99,30 @@ object FBDatabaseRepository{
 
     fun unfollowUser(followingUser: ECUser, userId: String? = FBAuthRepository.getUser()!!.uid){
         db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUser.uid!!).removeValue()
+    }
+
+    fun getFollowingUsers(userId: String? = FBAuthRepository.getUser()!!.uid) : MutableLiveData<MutableList<ECUser>>{
+        val result = MutableLiveData<MutableList<ECUser>>()
+        db.reference.child(REF_USERS_FOLLOW).child(userId!!)
+            .addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val list = mutableListOf<ECUser>()
+                    snapshot.children.forEach{
+                        val key = it.key
+                        val user = it.getValue<ECUser>()
+                        if (user != null){
+                            user.uid = key
+                            list.add(user)
+                        }
+                    }
+                    result.value = list
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e(TAG, "getFollowingUser failed, err=${error.message}")
+                }
+
+            })
+        return result
     }
 
 

@@ -65,4 +65,6 @@
 
     <string name="follow">Follow</string>
     <string name="following">Following</string>
+
+    <string name="following_count">%d Following</string>
 </resources>

@@ -1,13 +1,9 @@
 package ntu.platform.cookery.ui.fragment.profile
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.SingleLiveEvent
-import ntu.platform.cookery.data.entity.ECUser
 import ntu.platform.cookery.data.entity.Post
 import ntu.platform.cookery.data.entity.Recipe
 import ntu.platform.cookery.data.firebase.FBAuthRepository
@@ -20,6 +16,7 @@ class ProfileViewModel(val userId:String=FBAuthRepository.getUser()!!.uid) : Vie
     val isCurrentUser = FBAuthRepository.getUser()!!.uid == userId
     val user = FBDatabaseRepository.getUser(userId)
     val hasFollowUser = FBDatabaseRepository.hasFollowUser(userId)
+    val following = FBDatabaseRepository.getFollowingUsers(userId)
 
     val onPostClicked = SingleLiveEvent<Post>()
     val onRecipeClicked = SingleLiveEvent<Recipe>()

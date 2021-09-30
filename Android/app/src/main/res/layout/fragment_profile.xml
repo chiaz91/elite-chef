@@ -81,18 +81,11 @@
                         android:id="@+id/following"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0 following"
+                        android:text="@{@string/following_count(viewModel.following.size())}"
                         app:layout_constraintStart_toStartOf="@+id/name"
-                        app:layout_constraintTop_toBottomOf="@+id/name" />
+                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        tools:text="0 Following"/>
 
-                    <TextView
-                        android:id="@+id/follower"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="0 follower"
-                        app:layout_constraintStart_toEndOf="@+id/following"
-                        app:layout_constraintTop_toBottomOf="@+id/name" />
 
 
                     <TextView
@@ -118,7 +111,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/bio"
-                        tools:text="Follow"/>
+                        tools:text="@string/follow"/>
 
 
 

@@ -144,6 +144,9 @@
         <action
             android:id="@+id/action_profile_to_postCommentsFragment"
             app:destination="@id/postCommentsFragment" />
+        <action
+            android:id="@+id/action_profile_to_followListFragment"
+            app:destination="@id/followListFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileOtherFragment"
@@ -159,6 +162,9 @@
         <argument
             android:name="userId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_profileOtherFragment_to_followListFragment"
+            app:destination="@id/followListFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
@@ -169,7 +175,18 @@
             android:name="user"
             app:argType="ntu.platform.cookery.data.entity.ECUser" />
     </fragment>
-
+    <fragment
+        android:id="@+id/followListFragment"
+        android:name="ntu.platform.cookery.ui.fragment.follow_list.FollowListFragment"
+        android:label="Following"
+        tools:layout="@layout/fragment_follow_list">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_followListFragment_to_profileOtherFragment"
+            app:destination="@id/profileOtherFragment" />
+    </fragment>
 
 
 </navigation>

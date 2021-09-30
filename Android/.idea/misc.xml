@@ -7,6 +7,7 @@
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_add_recipe_ingredient.xml" value="0.1484375" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_add_recipe_ingredient_info.xml" value="0.1484375" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_add_recipe_timing.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_follow_list.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_new_post.xml" value="0.33" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_newsfeed.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_post_comments.xml" value="0.22" />
@@ -16,7 +17,9 @@
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/fragment_recipe_list.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_ingredient.xml" value="0.1484375" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_newsfeed.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_recipe.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_step_large.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_user.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/item_user_comment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/layout_profile_tabs.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/chiayu/Documents/project/git/fyp/Android/app/src/main/res/layout/tool_bar.xml" value="0.36666666666666664" />
