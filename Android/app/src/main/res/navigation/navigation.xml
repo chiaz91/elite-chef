@@ -132,11 +132,17 @@
         <action
             android:id="@+id/action_profile_to_profileEditFragment"
             app:destination="@id/profileEditFragment" />
+        <action
+            android:id="@+id/action_profile_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_profile_to_postCommentsFragment"
+            app:destination="@id/postCommentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
         android:name="ntu.platform.cookery.ui.fragment.profile_edit.ProfileEditFragment"
-        android:label="ProfileEditFragment"
+        android:label="Update Profile"
         tools:layout="@layout/fragment_profile_edit">
         <argument
             android:name="user"

@@ -152,6 +152,14 @@ object FBDatabaseRepository{
             .build()
     }
 
+    fun getUserRecipeOptions(userId: String? = FBAuthRepository.getUser()!!.uid): FirebaseRecyclerOptions<Recipe> {
+        val recipeRef = db.reference.child(REF_RECIPES).orderByChild("authorId").equalTo(userId)
+
+        return FirebaseRecyclerOptions.Builder<Recipe>()
+            .setQuery(recipeRef, Recipe::class.java)
+            .build()
+    }
+
     fun saveRecipeComment(recipeId: String, comment: UserComment){
         val refComment = db.reference.child(REF_RECIPES_COMMENTS).child(recipeId).push()
         comment.key = refComment.key
@@ -172,6 +180,7 @@ object FBDatabaseRepository{
             .setQuery(refComment, UserComment::class.java)
             .build()
     }
+
 
     // Newsfeed
     fun savePost(post: Post){
@@ -198,6 +207,14 @@ object FBDatabaseRepository{
         return FirebaseRecyclerOptions.Builder<Post>()
                 .setQuery(refPosts, Post::class.java)
                 .build()
+    }
+
+    fun getUserPostOptions(userId: String? = FBAuthRepository.getUser()!!.uid): FirebaseRecyclerOptions<Post>{
+        val refPosts = db.reference.child(REF_POSTS).orderByChild("userId").equalTo(userId)
+
+        return FirebaseRecyclerOptions.Builder<Post>()
+            .setQuery(refPosts, Post::class.java)
+            .build()
     }
 
     fun savePostComments(postId: String, comment: UserComment){

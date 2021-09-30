@@ -10,63 +10,149 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragment.profile.ProfileEditFragment">
+        android:layout_height="match_parent">
 
-
-        <include
-            android:id="@+id/toolbar_layout"
-            layout="@layout/tool_bar" />
-
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profile_pic"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="10dp"
-            android:background="@color/yellow"
-            android:src="@drawable/ic_launcher_foreground"
-            android:translationZ="5dp"
-            app:loadWithGlide="@{viewModel.user.graphic}"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:shapeAppearanceOverlay="@style/circularShape"
-            app:strokeColor="@color/white"
-            app:strokeWidth="1dp" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
-            app:layout_constraintStart_toEndOf="@+id/profile_pic"
-            app:layout_constraintTop_toTopOf="@+id/profile_pic"
-            android:text="@{viewModel.user.name}"
-            tools:text="Display Name" />
-
-        <TextView
-            android:id="@+id/friendship"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/name"
-            app:layout_constraintTop_toBottomOf="@+id/name"
-            android:text="0 following, 0 follower"
-            tools:text="0 following, 0 follower" />
-
-        <TextView
-            android:id="@+id/bio"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@{viewModel.user.bio}"
-            app:layout_constraintStart_toStartOf="@+id/profile_pic"
-            app:layout_constraintTop_toBottomOf="@+id/profile_pic"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="" />
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.NestedScrolling.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/white"
+                app:statusBarScrim="@android:color/transparent"
+                android:background="@color/white"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:toolbarId="@+id/toolbar"
+                app:titleEnabled="false">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="parallax"
+                    app:popupTheme="@style/Theme.NestedScrolling.PopupOverlay" >
+
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="?attr/actionBarSize"
+                    tools:context=".ui.fragment.profile.ProfileEditFragment">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_pic"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/yellow"
+                        android:src="@drawable/ic_launcher_foreground"
+                        android:translationZ="5dp"
+                        app:loadWithGlide="@{viewModel.user.graphic}"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:shapeAppearanceOverlay="@style/circularShape"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="1dp" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/profile_pic"
+                        app:layout_constraintTop_toTopOf="@+id/profile_pic"
+                        android:text="@{viewModel.user.name}"
+                        tools:text="Display Name" />
+
+                    <TextView
+                        android:id="@+id/following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@+id/name"
+                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        android:text="0 following" />
+
+                    <TextView
+                        android:id="@+id/follower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/following"
+                        app:layout_constraintTop_toBottomOf="@+id/name"
+                        android:text="0 follower"/>
+
+
+
+                    <TextView
+                        android:id="@+id/bio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@{viewModel.user.bio}"
+                        app:layout_constraintStart_toStartOf="@+id/profile_pic"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_pic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="fill"
+                app:tabMode="fixed">
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tab_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Posts"
+                    />
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tab_recipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recipes"
+                    />
+            </com.google.android.material.tabs.TabLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPosts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_newsfeed"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_recipe"/>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 </layout>
