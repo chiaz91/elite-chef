@@ -89,6 +89,9 @@
         <action
             android:id="@+id/action_recipeDetailsFragment_to_addRecipeInfoFragment"
             app:destination="@id/addRecipeInfoFragment" />
+        <action
+            android:id="@+id/action_recipeDetailsFragment_to_profileOtherFragment"
+            app:destination="@id/profileOtherFragment" />
     </fragment>
 
 
@@ -120,6 +123,9 @@
         <argument
             android:name="post"
             app:argType="ntu.platform.cookery.data.entity.Post" />
+        <action
+            android:id="@+id/action_postCommentsFragment_to_profileOtherFragment"
+            app:destination="@id/profileOtherFragment" />
     </fragment>
 
 
@@ -140,6 +146,21 @@
             app:destination="@id/postCommentsFragment" />
     </fragment>
     <fragment
+        android:id="@+id/profileOtherFragment"
+        android:name="ntu.platform.cookery.ui.fragment.profile.ProfileOtherFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileOtherFragment_to_postCommentsFragment"
+            app:destination="@id/postCommentsFragment" />
+        <action
+            android:id="@+id/action_profileOtherFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
+    <fragment
         android:id="@+id/profileEditFragment"
         android:name="ntu.platform.cookery.ui.fragment.profile_edit.ProfileEditFragment"
         android:label="Update Profile"
@@ -148,6 +169,7 @@
             android:name="user"
             app:argType="ntu.platform.cookery.data.entity.ECUser" />
     </fragment>
+
 
 
 </navigation>

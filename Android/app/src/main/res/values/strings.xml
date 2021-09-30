@@ -62,4 +62,7 @@
     <string name="rest_time_helper">Duration for the dish to be rest aside.</string>
     <string name="suffix_minutes">mins</string>
     <string name="action_settings">Settings</string>
+
+    <string name="follow">Follow</string>
+    <string name="following">Following</string>
 </resources>

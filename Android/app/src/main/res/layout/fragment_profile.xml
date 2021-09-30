@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="ntu.platform.cookery.ui.fragment.profile.ProfileViewModel" />
@@ -58,9 +59,9 @@
                         android:background="@color/yellow"
                         android:src="@drawable/ic_launcher_foreground"
                         android:translationZ="5dp"
-                        app:loadWithGlide="@{viewModel.user.graphic}"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loadWithGlide="@{viewModel.user.graphic}"
                         app:shapeAppearanceOverlay="@style/circularShape"
                         app:strokeColor="@color/white"
                         app:strokeWidth="1dp" />
@@ -69,30 +70,29 @@
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@{viewModel.user.name}"
                         app:layout_constraintStart_toEndOf="@+id/profile_pic"
                         app:layout_constraintTop_toTopOf="@+id/profile_pic"
-                        android:text="@{viewModel.user.name}"
                         tools:text="Display Name" />
 
                     <TextView
                         android:id="@+id/following"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="0 following"
                         app:layout_constraintStart_toStartOf="@+id/name"
-                        app:layout_constraintTop_toBottomOf="@+id/name"
-                        android:text="0 following" />
+                        app:layout_constraintTop_toBottomOf="@+id/name" />
 
                     <TextView
                         android:id="@+id/follower"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:text="0 follower"
                         app:layout_constraintStart_toEndOf="@+id/following"
-                        app:layout_constraintTop_toBottomOf="@+id/name"
-                        android:text="0 follower"/>
-
+                        app:layout_constraintTop_toBottomOf="@+id/name" />
 
 
                     <TextView
@@ -101,10 +101,26 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="@{viewModel.user.bio}"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/profile_pic"
                         app:layout_constraintTop_toBottomOf="@+id/profile_pic"
-                        app:layout_constraintEnd_toEndOf="parent"
                         tools:text="" />
+
+                    <Button
+                        android:id="@+id/btn_follow"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@{viewModel.hasFollowUser?@string/following:@string/follow}"
+                        android:visibility="@{viewModel.isCurrentUser?View.GONE:View.VISIBLE}"
+                        android:onClick="@{()->viewModel.onFollowClicked()}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/bio"
+                        tools:text="Follow"/>
+
+
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

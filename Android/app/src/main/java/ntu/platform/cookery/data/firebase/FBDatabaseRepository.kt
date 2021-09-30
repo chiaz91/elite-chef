@@ -69,6 +69,37 @@ object FBDatabaseRepository{
         return result
     }
 
+    fun hasFollowUser(followingUserId: String, userId: String? = FBAuthRepository.getUser()!!.uid): MutableLiveData<Boolean>{
+        val result = MutableLiveData<Boolean>(false)
+        db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUserId)
+            .addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue<ECUser>()
+                    result.value = (user!=null)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e(TAG, "hasFollowUser failed, err=${error.message}")
+                }
+            })
+        return result
+    }
+
+    // User Follow
+    fun followUser(followingUser: ECUser, userId: String? = FBAuthRepository.getUser()!!.uid){
+        db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUser.uid!!).setValue(followingUser)
+            .addOnSuccessListener {
+                Log.e(TAG, "followUser Success")
+            }
+            .addOnFailureListener{
+                Log.e(TAG, "followUser failed, err=${it.message}")
+            }
+    }
+
+    fun unfollowUser(followingUser: ECUser, userId: String? = FBAuthRepository.getUser()!!.uid){
+        db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUser.uid!!).removeValue()
+    }
+
 
     // Recipes
     fun saveRecipe(recipe: Recipe): DatabaseReference{

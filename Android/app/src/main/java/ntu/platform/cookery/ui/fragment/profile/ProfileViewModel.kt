@@ -7,6 +7,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.SingleLiveEvent
+import ntu.platform.cookery.data.entity.ECUser
 import ntu.platform.cookery.data.entity.Post
 import ntu.platform.cookery.data.entity.Recipe
 import ntu.platform.cookery.data.firebase.FBAuthRepository
@@ -18,6 +19,7 @@ private const val TAG = "Cy.profile.vm"
 class ProfileViewModel(val userId:String=FBAuthRepository.getUser()!!.uid) : ViewModel() {
     val isCurrentUser = FBAuthRepository.getUser()!!.uid == userId
     val user = FBDatabaseRepository.getUser(userId)
+    val hasFollowUser = FBDatabaseRepository.hasFollowUser(userId)
 
     val onPostClicked = SingleLiveEvent<Post>()
     val onRecipeClicked = SingleLiveEvent<Recipe>()
@@ -44,7 +46,13 @@ class ProfileViewModel(val userId:String=FBAuthRepository.getUser()!!.uid) : Vie
             }
             onRecipeClicked.value = recipe
         }
+    }
 
+    fun onFollowClicked(){
+        when(hasFollowUser.value!!){
+            true -> FBDatabaseRepository.unfollowUser(user.value!!)
+            else -> FBDatabaseRepository.followUser(user.value!!)
+        }
     }
 
 
