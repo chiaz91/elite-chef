@@ -3,22 +3,26 @@ package ntu.platform.cookery.ui.fragment.profile
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.SingleLiveEvent
 import ntu.platform.cookery.data.entity.Post
 import ntu.platform.cookery.data.entity.Recipe
+import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.data.firebase.FBDatabaseRepository
 import ntu.platform.cookery.ui.adapter.FBPostsAdapter
 import ntu.platform.cookery.ui.adapter.FBRecipeAdapter
 
 private const val TAG = "Cy.profile.vm"
-class ProfileViewModel : ViewModel() {
-    val user = FBDatabaseRepository.getUser()
+class ProfileViewModel(val userId:String=FBAuthRepository.getUser()!!.uid) : ViewModel() {
+    val isCurrentUser = FBAuthRepository.getUser()!!.uid == userId
+    val user = FBDatabaseRepository.getUser(userId)
+
     val onPostClicked = SingleLiveEvent<Post>()
     val onRecipeClicked = SingleLiveEvent<Recipe>()
 
-    val postOptions = FBDatabaseRepository.getUserPostOptions()
+    val postOptions = FBDatabaseRepository.getUserPostOptions(userId)
     val postAdapter = FBPostsAdapter(postOptions).also {
         it.clickedListener = BaseClickedListener{action, viewHolder ->
             Log.d(TAG, "$action, click on item ${viewHolder.bindingAdapterPosition}")
@@ -30,7 +34,7 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    val recipeOptions = FBDatabaseRepository.getUserRecipeOptions()
+    val recipeOptions = FBDatabaseRepository.getUserRecipeOptions(userId)
     val recipeAdapter = FBRecipeAdapter(recipeOptions).also {
         it.clickedListener = BaseClickedListener { action, viewHolder ->
             Log.d(TAG, "$action, click on item ${viewHolder.bindingAdapterPosition}")
@@ -42,4 +46,6 @@ class ProfileViewModel : ViewModel() {
         }
 
     }
+
+
 }

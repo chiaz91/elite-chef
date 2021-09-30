@@ -129,6 +129,11 @@
         android:name="ntu.platform.cookery.ui.fragment.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
         <action
             android:id="@+id/action_profile_to_profileEditFragment"
             app:destination="@id/profileEditFragment" />

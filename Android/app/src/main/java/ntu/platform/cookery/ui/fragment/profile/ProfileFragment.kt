@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.databinding.FragmentProfileBinding
+import ntu.platform.cookery.ui.fragment.profile_edit.ProfileEditViewModel
 import ntu.platform.cookery.util.setToolBar
 
 private const val TAG = "Cy.profile"
@@ -17,39 +20,31 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
     override val bindingInflater: (LayoutInflater) -> FragmentProfileBinding
     get() = FragmentProfileBinding::inflate
 
-    private val _viewModel: ProfileViewModel by viewModels()
+    private lateinit var _viewModel: ProfileViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+        val args by navArgs<ProfileFragmentArgs>()
+        var uid = args.userId ?: FBAuthRepository.getUser()!!.uid
+
+        Log.d(TAG, "arg.uid=${args.userId}")
+        val vmFactory = ProfileViewModelFactory(uid)
+        _viewModel = ViewModelProvider(this, vmFactory).get(ProfileViewModel::class.java)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initBinding()
         observeViewModel()
-
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.profile, menu);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.action_edit -> {
-                val action = ProfileFragmentDirections.actionProfileToProfileEditFragment(_viewModel.user.value!!)
-                findNavController().navigate(action)
-                true
-            }
-
-            R.id.action_logout -> {
-                FBAuthRepository.logout()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
+        if (_viewModel.isCurrentUser){
+            setHasOptionsMenu(true)
         }
     }
+
+
 
     private fun initBinding() {
         with(binding){
@@ -92,6 +87,7 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
 
     private fun observeViewModel(){
         with(_viewModel){
+
             onPostClicked.observe(viewLifecycleOwner, {
                 val action = ProfileFragmentDirections.actionProfileToPostCommentsFragment(it)
                 findNavController().navigate(action)
@@ -105,6 +101,8 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
     }
 
 
+
+    // Life Cycle
     override fun onStart() {
         super.onStart()
         with(_viewModel){
@@ -119,5 +117,29 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
             recipeAdapter.stopListening()
         }
         super.onStop()
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.profile, menu);
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_edit -> {
+                val action = ProfileFragmentDirections.actionProfileToProfileEditFragment(_viewModel.user.value!!)
+                findNavController().navigate(action)
+                true
+            }
+
+            R.id.action_logout -> {
+                FBAuthRepository.logout()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
