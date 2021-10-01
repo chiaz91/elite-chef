@@ -13,6 +13,7 @@ const val REF_RECIPES_COMMENTS  = "recipes_comments"
 const val REF_CHATS             = "chats"
 const val REF_CHAT_MEMBER       = "chat_member"
 const val REF_CHAT_MESSAGES     = "chat_messages"
+const val REF_USER_CHATS        = "user_chats"
 
 const val REF_POSTS             = "posts"
 const val REF_POSTS_COMMENTS    = "post_comments"

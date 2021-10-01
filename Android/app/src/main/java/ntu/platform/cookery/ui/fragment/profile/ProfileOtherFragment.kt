@@ -1,8 +1,10 @@
 package ntu.platform.cookery.ui.fragment.profile
 
 import android.os.Bundle
+import android.text.TextPaint
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -10,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.data.firebase.FBAuthRepository
+import ntu.platform.cookery.data.firebase.FBDatabaseRepository
 import ntu.platform.cookery.databinding.FragmentProfileBinding
 import ntu.platform.cookery.util.setToolBar
 
@@ -131,9 +134,22 @@ class ProfileOtherFragment:  BindingFragment<FragmentProfileBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
+            R.id.action_chat -> {
+//                Toast.makeText(requireContext(), "WIP: chat with this user", Toast.LENGTH_SHORT).show()
+                toChat()
+                true
+            }
 
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun toChat(){
+        // putting friend's id
+        val otherUser = _viewModel.user.value!!
+        val chatId = FBDatabaseRepository.getChatIdByUserIds(otherUser.uid!!, FBAuthRepository.getUser()!!.uid)
+        val action = ProfileOtherFragmentDirections.actionProfileOtherFragmentToChatFragment(chatId)
+        findNavController().navigate(action)
     }
 }

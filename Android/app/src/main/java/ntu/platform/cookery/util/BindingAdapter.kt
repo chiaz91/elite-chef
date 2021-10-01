@@ -1,6 +1,7 @@
 package ntu.platform.cookery.util
 
 import android.net.Uri
+import android.text.format.DateFormat
 import android.text.format.DateUtils
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BaseRecyclerViewAdapter
 import ntu.platform.cookery.base.MutableListLiveData
+import java.text.SimpleDateFormat
 
 private const val TAG = "cz.BindAdapter"
 
@@ -75,5 +77,14 @@ object BindingAdapter{
     fun TextView.relativeTimestamp( time: Long){
         text = DateUtils.getRelativeTimeSpanString(time)
     }
+
+
+    @JvmStatic
+    @BindingAdapter("timestamp", "dateFormat", requireAll = false)
+    fun TextView.formatDatetime(timestamp:Long, dateFormat: String?) {
+        val sdf = SimpleDateFormat(dateFormat ?: "yyyy-MM-dd HH:mm:ss.SSS")
+        this.text = sdf.format(timestamp)
+    }
+
 
 }

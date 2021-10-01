@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="showDate"
+            type="Boolean" />
+        <variable
+            name="item"
+            type="ntu.platform.cookery.data.entity.ChatMessage" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/msg_date"
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="@{showDate?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:dateFormat="@{`dd-MM-yyyy`}"
+            app:timestamp="@{item.timestamp}"
+            tools:text="31/12/2001" />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_msg_receive"
+            android:elevation="5dp"
+            android:maxWidth="300dp"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@{item.message}"
+            android:textColor="#999"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date"
+            tools:text="@string/test_msg" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/message"
+            app:layout_constraintStart_toEndOf="@+id/message"
+            app:dateFormat="@{`hh.mm aa`}"
+            app:timestamp="@{item.timestamp}"
+            tools:text="11:59pm" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

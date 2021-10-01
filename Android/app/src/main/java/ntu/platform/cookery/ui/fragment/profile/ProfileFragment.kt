@@ -3,6 +3,7 @@ package ntu.platform.cookery.ui.fragment.profile
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
@@ -10,6 +11,7 @@ import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.databinding.FragmentProfileBinding
+import ntu.platform.cookery.util.hashMD5
 import ntu.platform.cookery.util.setToolBar
 
 private const val TAG = "Cy.profile"
@@ -118,9 +120,10 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.profile_other, menu)
         when {
             _viewModel.isCurrentUser -> inflater.inflate(R.menu.profile, menu)
-            else -> inflater.inflate(R.menu.profile_other, menu)
         }
     }
 
@@ -138,7 +141,14 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
                 true
             }
 
+            R.id.action_chat -> {
+                Toast.makeText(requireContext(), "WIP: open chat rooms", Toast.LENGTH_SHORT).show()
+
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 }

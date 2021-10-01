@@ -18,6 +18,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import ntu.platform.cookery.R
 import java.io.File
+import java.lang.Exception
+import java.lang.StringBuilder
+import java.math.BigInteger
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 fun Fragment.setToolBar(toolbar: Toolbar){
@@ -95,5 +102,24 @@ fun  <T : Any> List<T>.log(tag:String? = "Cy.Debug"){
     forEach{ingredient ->
         Log.d(tag, ingredient.toString())
     }
+}
 
+
+fun String.hashMD5(): String{
+    try {
+        val md = MessageDigest.getInstance("MD5")
+        md.update( this.encodeToByteArray())
+        val messageDigest = md.digest()
+        val intBytes = BigInteger(1, messageDigest)
+        return intBytes.toString(16)
+
+    } catch (e: Exception ){
+        e.printStackTrace()
+    }
+    return ""
+}
+
+fun isSameDate(date1:Long, date2: Long): Boolean{
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    return sdf.format(Date(date1)) == sdf.format(Date(date2))
 }

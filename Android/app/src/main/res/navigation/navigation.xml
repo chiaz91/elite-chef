@@ -165,6 +165,9 @@
         <action
             android:id="@+id/action_profileOtherFragment_to_followListFragment"
             app:destination="@id/followListFragment" />
+        <action
+            android:id="@+id/action_profileOtherFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"
@@ -186,6 +189,15 @@
         <action
             android:id="@+id/action_followListFragment_to_profileOtherFragment"
             app:destination="@id/profileOtherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="ntu.platform.cookery.ui.fragment.chat.ChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat">
+        <argument
+            android:name="chatId"
+            app:argType="string" />
     </fragment>
 
 
