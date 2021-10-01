@@ -142,13 +142,17 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
             }
 
             R.id.action_chat -> {
-                Toast.makeText(requireContext(), "WIP: open chat rooms", Toast.LENGTH_SHORT).show()
-
+                toChatList()
                 true
             }
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun toChatList(){
+        val action = ProfileFragmentDirections.actionProfileToChatListFragment()
+        findNavController().navigate(action)
     }
 
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.databinding.FragmentChatBinding
 import ntu.platform.cookery.util.setToolBar
@@ -45,6 +46,7 @@ class ChatFragment:  BindingFragment<FragmentChatBinding>() {
 
 
             rvMessages.adapter = _viewModel.messageAdapter
+            (rvMessages.layoutManager as LinearLayoutManager).stackFromEnd = true
         }
     }
 

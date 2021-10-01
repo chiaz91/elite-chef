@@ -1,6 +1,5 @@
 package ntu.platform.cookery.ui.fragment.new_post
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ntu.platform.cookery.data.entity.Post
@@ -11,12 +10,6 @@ class NewPostViewModel : ViewModel() {
     var user = FBDatabaseRepository.getUser()
     val message = MutableLiveData<String>()
     val graphic = MutableLiveData<String?>()
-
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
-    }
-    val text: LiveData<String> = _text
 
 
     fun save(){

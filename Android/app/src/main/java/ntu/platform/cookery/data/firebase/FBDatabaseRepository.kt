@@ -296,6 +296,17 @@ object FBDatabaseRepository{
 
 
     // Chats
+
+    fun getChatList(userId: String=FBAuthRepository.getUser()!!.uid):  FirebaseRecyclerOptions<Chat>{
+        val keyQuery = db.reference.child(REF_USER_CHATS).child(userId)
+        val dataRef  = db.reference.child(REF_CHATS)
+
+        return FirebaseRecyclerOptions.Builder<Chat>()
+            .setIndexedQuery(keyQuery, dataRef, Chat::class.java)
+            .build()
+    }
+
+
     fun getChat(chatId: String):  MutableLiveData<Chat>{
         val result = MutableLiveData<Chat>()
         val rootRef = db.reference.child(REF_CHATS).child(chatId)
@@ -385,8 +396,11 @@ object FBDatabaseRepository{
                     Log.d(TAG, "loadChatMember.member=${uid}::${user.name}")
                     members.add(user)
                 }
-                chat.title = members.joinToString(" and ")
+                chat.title = members.joinToString(" and "){ user ->
+                    user.name!!
+                }
                 chat.members = members
+                updateChat(chat)
             }
             .addOnFailureListener{
                 Log.e(TAG, "loadChatMember(${chat.key}), error${it.message}")
