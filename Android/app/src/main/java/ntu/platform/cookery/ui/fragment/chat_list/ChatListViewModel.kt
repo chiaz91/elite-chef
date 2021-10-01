@@ -2,7 +2,6 @@ package ntu.platform.cookery.ui.fragment.chat_list
 
 
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.SingleLiveEvent
 import ntu.platform.cookery.data.entity.Chat

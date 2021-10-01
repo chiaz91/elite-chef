@@ -316,6 +316,7 @@ object FBDatabaseRepository{
                     key = chatId
                 } ?: Chat(key = chatId)
                 result.value = chat
+                loadChatMember(chat)
             }
             .addOnFailureListener{
                 Log.d(TAG, "getChat.Failed, e=${it.message}")
@@ -400,7 +401,7 @@ object FBDatabaseRepository{
                     user.name!!
                 }
                 chat.members = members
-                updateChat(chat)
+//                updateChat(chat)
             }
             .addOnFailureListener{
                 Log.e(TAG, "loadChatMember(${chat.key}), error${it.message}")
