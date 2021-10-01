@@ -25,7 +25,7 @@ class FBChatMessagesAdapter(
 ): FirebaseRecyclerAdapter<ChatMessage, FBChatMessagesAdapter.MessageViewHolder>(options) {
     companion object{
         private const val TYPE_MSG_SEND = 1
-        private const val TYPE_MSG_RECEIVE = 1
+        private const val TYPE_MSG_RECEIVE = 2
 
         const val ACTION_ITEM_CLICK = 1001
         const val ACTION_PROFILE_CLICK = 1002
@@ -54,7 +54,7 @@ class FBChatMessagesAdapter(
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int, model: ChatMessage) {
-        var showDate = when{
+        val showDate = when{
             position == 0 -> true
             !isSameDate(model.timestamp!!, getItem(position-1).timestamp!!) -> true
             else -> false
