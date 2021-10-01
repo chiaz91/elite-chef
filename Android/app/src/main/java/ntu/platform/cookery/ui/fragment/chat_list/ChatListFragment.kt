@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.databinding.FragmentChatListBinding
 import ntu.platform.cookery.util.setToolBar
@@ -32,6 +33,8 @@ class ChatListFragment:  BindingFragment<FragmentChatListBinding>() {
             setToolBar(toolbarLayout.toolbar)
 
             rvChatList.adapter = _viewModel.chatListAdapter
+            rvChatList.addItemDecoration( DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+
         }
     }
 

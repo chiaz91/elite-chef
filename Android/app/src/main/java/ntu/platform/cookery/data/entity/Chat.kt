@@ -7,7 +7,7 @@ data class Chat(
     var title: String? = null, // temp: nameA and nameB
     var senderId: String? = null,
     var sender:String? = null,
-    var lastMessage:String? = null,
+    var lastMessage:String? = "(no message)",
     var lastUpdate: Long? = null,
     @get:Exclude var key: String? =null,
     @get:Exclude var members: MutableList<ECUser>? =null,

@@ -75,7 +75,7 @@ object BindingAdapter{
     @JvmStatic
     @BindingAdapter( "timeAgo")
     fun TextView.relativeTimestamp( time: Long){
-        text = DateUtils.getRelativeTimeSpanString(time)
+        text = if (time==0L) "" else DateUtils.getRelativeTimeSpanString(time)
     }
 
 
