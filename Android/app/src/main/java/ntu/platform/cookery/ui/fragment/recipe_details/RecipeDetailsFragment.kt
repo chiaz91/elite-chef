@@ -81,15 +81,6 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
         }
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        _viewModel.adapter.startListening()
-//    }
-//
-//    override fun onStop() {
-//        _viewModel.adapter.stopListening()
-//        super.onStop()
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

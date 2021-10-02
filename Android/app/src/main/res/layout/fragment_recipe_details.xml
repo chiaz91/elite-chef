@@ -184,7 +184,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/item_ingredient" />
+                    tools:listitem="@layout/item_ingredient"
+                    tools:itemCount="2"/>
 
                 <TextView
                     android:id="@+id/label_steps"
@@ -199,7 +200,61 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/item_step_large" />
+                    tools:listitem="@layout/item_step_large"
+                    tools:itemCount="1"/>
+
+
+                <TextView
+                    android:id="@+id/label_author"
+                    style="@style/Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Author" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_pic"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/yellow"
+                        android:src="@drawable/ic_launcher_foreground"
+                        android:translationZ="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loadWithGlide="@{viewModel.recipe.author.graphic}"
+                        app:shapeAppearanceOverlay="@style/circularShape"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="1dp" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@{viewModel.recipe.author.name}"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toEndOf="@+id/profile_pic"
+                        app:layout_constraintTop_toTopOf="@+id/profile_pic"
+                        tools:text="Display Name" />
+
+                    <TextView
+                        android:id="@+id/bio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@{viewModel.recipe.author.bio}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/profile_pic"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_pic"
+                        tools:text="" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/label_comments"
@@ -216,6 +271,7 @@
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/item_user_comment"
+                    tools:itemCount="1"
                     />
 
             </LinearLayout>
