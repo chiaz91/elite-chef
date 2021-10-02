@@ -54,6 +54,10 @@ class ProfileOtherFragment:  BindingFragment<FragmentProfileBinding>() {
                 val action = ProfileOtherFragmentDirections.actionProfileOtherFragmentToFollowListFragment(_viewModel.userId)
                 findNavController().navigate(action)
             }
+            follower.setOnClickListener{
+                val action = ProfileFragmentDirections.actionProfileToFollowListFragment(_viewModel.userId)
+                findNavController().navigate(action)
+            }
             rvPosts.adapter = _viewModel.postAdapter
             rvRecipes.adapter = _viewModel.recipeAdapter
 

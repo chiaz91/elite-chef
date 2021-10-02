@@ -76,8 +76,8 @@ object FBDatabaseRepository{
         db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUserId)
             .addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val user = snapshot.getValue<ECUser>()
-                    result.value = (user!=null)
+//                    val user = snapshot.getValue<Boolean>()
+                    result.value = snapshot.exists()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -87,43 +87,88 @@ object FBDatabaseRepository{
         return result
     }
 
-    fun followUser(followingUser: ECUser, userId: String? = FBAuthRepository.getUser()!!.uid){
-        db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUser.uid!!).setValue(followingUser)
+    fun followUser(followingUser: ECUser, userId: String = FBAuthRepository.getUser()!!.uid){
+        db.reference.child(REF_USERS_FOLLOW).child(userId).child(followingUser.uid!!).setValue(true)
             .addOnSuccessListener {
                 Log.e(TAG, "followUser Success")
             }
             .addOnFailureListener{
                 Log.e(TAG, "followUser failed, err=${it.message}")
             }
+
+        // add user follow by
+        db.reference.child(REF_USERS_FOLLOW_BY).child(followingUser.uid!!).child(userId).setValue(true)
+            .addOnSuccessListener {
+                Log.e(TAG, "userFollowBy Success")
+            }
+            .addOnFailureListener{
+                Log.e(TAG, "userFollowBy failed, err=${it.message}")
+            }
     }
 
-    fun unfollowUser(followingUser: ECUser, userId: String? = FBAuthRepository.getUser()!!.uid){
-        db.reference.child(REF_USERS_FOLLOW).child(userId!!).child(followingUser.uid!!).removeValue()
+
+
+    fun unfollowUser(followingUser: ECUser, userId: String = FBAuthRepository.getUser()!!.uid){
+        db.reference.child(REF_USERS_FOLLOW).child(userId).child(followingUser.uid!!).removeValue()
+        db.reference.child(REF_USERS_FOLLOW_BY).child(followingUser.uid!!).child(userId).removeValue()
     }
 
-    fun getFollowingUsers(userId: String? = FBAuthRepository.getUser()!!.uid) : MutableLiveData<MutableList<ECUser>>{
-        val result = MutableLiveData<MutableList<ECUser>>()
+    fun getUserFollowingIds(userId: String? = FBAuthRepository.getUser()!!.uid) : MutableLiveData<MutableList<String>>{
+        val result = MutableLiveData<MutableList<String>>()
         db.reference.child(REF_USERS_FOLLOW).child(userId!!)
             .addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val list = mutableListOf<ECUser>()
+                    val list = mutableListOf<String>()
                     snapshot.children.forEach{
-                        val key = it.key
-                        val user = it.getValue<ECUser>()
-                        if (user != null){
-                            user.uid = key
-                            list.add(user)
-                        }
+                        list.add(it.key!!)
                     }
                     result.value = list
                 }
                 override fun onCancelled(error: DatabaseError) {
-                    Log.e(TAG, "getFollowingUser failed, err=${error.message}")
+                    Log.e(TAG, "getFollowingUserId failed, err=${error.message}")
                 }
-
             })
         return result
     }
+
+    fun getUserFollowByIds(userId: String? = FBAuthRepository.getUser()!!.uid) : MutableLiveData<MutableList<String>>{
+        val result = MutableLiveData<MutableList<String>>()
+        db.reference.child(REF_USERS_FOLLOW_BY).child(userId!!)
+            .addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val list = mutableListOf<String>()
+                    snapshot.children.forEach{
+                        list.add(it.key!!)
+                    }
+                    result.value = list
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e(TAG, "getFollowingUserId failed, err=${error.message}")
+                }
+            })
+        return result
+    }
+
+
+    fun getFollowingOptions(userId: String=FBAuthRepository.getUser()!!.uid):  FirebaseRecyclerOptions<ECUser>{
+        val keyQuery = db.reference.child(REF_USERS_FOLLOW).child(userId)
+        val dataRef  = db.reference.child(REF_USERS)
+
+        return FirebaseRecyclerOptions.Builder<ECUser>()
+            .setIndexedQuery(keyQuery, dataRef, ECUser::class.java)
+            .build()
+    }
+
+    fun getFollowByOptions(userId: String=FBAuthRepository.getUser()!!.uid):  FirebaseRecyclerOptions<ECUser>{
+        val keyQuery = db.reference.child(REF_USERS_FOLLOW_BY).child(userId)
+        val dataRef  = db.reference.child(REF_USERS)
+
+        return FirebaseRecyclerOptions.Builder<ECUser>()
+            .setIndexedQuery(keyQuery, dataRef, ECUser::class.java)
+            .build()
+    }
+
+
 
 
     // Recipes

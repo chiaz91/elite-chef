@@ -49,10 +49,10 @@ class FollowListFragment:  BindingFragment<FragmentFollowListBinding>() {
 
     private fun observeViewModel(){
         with(_viewModel){
-            users.observe(viewLifecycleOwner, {
-                _viewModel.adapter.items = it
-                _viewModel.adapter.notifyDataSetChanged()
-            })
+//            users.observe(viewLifecycleOwner, {
+//                _viewModel.adapter.items = it
+//                _viewModel.adapter.notifyDataSetChanged()
+//            })
 
             onUserClicked.observe(viewLifecycleOwner, {
                 Log.d(TAG, "key=${it.uid}, name=${it.name}")
@@ -63,6 +63,17 @@ class FollowListFragment:  BindingFragment<FragmentFollowListBinding>() {
 
 
         }
+    }
 
+
+
+    override fun onStart() {
+        super.onStart()
+        _viewModel.adapter.startListening()
+    }
+
+    override fun onStop() {
+        _viewModel.adapter.stopListening()
+        super.onStop()
     }
 }

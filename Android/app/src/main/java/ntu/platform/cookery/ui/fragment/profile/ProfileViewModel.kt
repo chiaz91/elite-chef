@@ -16,7 +16,8 @@ class ProfileViewModel(val userId:String=FBAuthRepository.getUser()!!.uid) : Vie
     val isCurrentUser = FBAuthRepository.getUser()!!.uid == userId
     val user = FBDatabaseRepository.getUser(userId)
     val hasFollowUser = FBDatabaseRepository.hasFollowUser(userId)
-    val following = FBDatabaseRepository.getFollowingUsers(userId)
+    val following = FBDatabaseRepository.getUserFollowingIds(userId)
+    val followBy  = FBDatabaseRepository.getUserFollowByIds(userId)
 
     val onPostClicked = SingleLiveEvent<Post>()
     val onRecipeClicked = SingleLiveEvent<Recipe>()

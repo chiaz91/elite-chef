@@ -2,35 +2,39 @@ package ntu.platform.cookery.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import ntu.platform.cookery.BR
 import ntu.platform.cookery.databinding.*
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.BaseRecyclerViewAdapter
 import ntu.platform.cookery.base.BaseRecyclerViewHolder
+import ntu.platform.cookery.data.entity.Chat
 import ntu.platform.cookery.data.entity.ECUser
 
 
-class UserAdapter(var clickedListener: BaseClickedListener? = null): BaseRecyclerViewAdapter<ECUser>() {
+class FBUserAdapter(
+    options: FirebaseRecyclerOptions<ECUser>, var clickedListener: BaseClickedListener? = null)
+: FirebaseRecyclerAdapter<ECUser, FBUserAdapter.UserViewHolder>(options) {
+
     companion object{
         const val ACTION_ITEM_CLICK = 1001
     }
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseRecyclerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemUserBinding.inflate(inflater, parent, false)
         return UserViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: BaseRecyclerViewHolder, position: Int) {
-        when (holder) {
-            is UserViewHolder -> {
-                val user = items?.get(position)!!
-                holder.bindAs( user, clickedListener)
-            }
-        }
-
+    override fun onBindViewHolder(
+        holder: UserViewHolder,
+        position: Int,
+        model: ECUser
+    ) {
+        holder.bindAs( model, clickedListener)
     }
 
 
@@ -44,6 +48,8 @@ class UserAdapter(var clickedListener: BaseClickedListener? = null): BaseRecycle
             binding.setVariable(BR.item, user)
         }
     }
+
+
 
 
 }
