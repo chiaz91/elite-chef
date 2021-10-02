@@ -6,6 +6,7 @@ import android.view.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.tabs.TabLayout
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.databinding.FragmentFollowListBinding
 import ntu.platform.cookery.ui.fragment.profile.ProfileOtherFragmentArgs
@@ -42,26 +43,41 @@ class FollowListFragment:  BindingFragment<FragmentFollowListBinding>() {
 
     private fun initBinding() {
         with(binding){
-            setToolBar(binding.toolbarLayout.toolbar)
-            rvUsers.adapter = _viewModel.adapter
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = _viewModel
+            setToolBar(toolbar)
+            rvUsers.adapter = _viewModel.followingAdapter
+
+            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when(tab?.text){
+                        "Follwoing" -> {
+                            rvUsers.adapter = _viewModel.followingAdapter
+                        }
+                        "Follower" -> {
+                            rvUsers.adapter = _viewModel.followerAdapter
+                        }
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+
+            })
         }
     }
 
     private fun observeViewModel(){
         with(_viewModel){
-//            users.observe(viewLifecycleOwner, {
-//                _viewModel.adapter.items = it
-//                _viewModel.adapter.notifyDataSetChanged()
-//            })
-
             onUserClicked.observe(viewLifecycleOwner, {
                 Log.d(TAG, "key=${it.uid}, name=${it.name}")
 
                 val action = FollowListFragmentDirections.actionFollowListFragmentToProfileOtherFragment(it.uid!!)
                 findNavController().navigate(action)
             })
-
-
         }
     }
 
@@ -69,11 +85,13 @@ class FollowListFragment:  BindingFragment<FragmentFollowListBinding>() {
 
     override fun onStart() {
         super.onStart()
-        _viewModel.adapter.startListening()
+        _viewModel.followingAdapter.startListening()
+        _viewModel.followerAdapter.startListening()
     }
 
     override fun onStop() {
-        _viewModel.adapter.stopListening()
+        _viewModel.followingAdapter.stopListening()
+        _viewModel.followerAdapter.stopListening()
         super.onStop()
     }
 }

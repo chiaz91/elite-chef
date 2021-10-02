@@ -11,9 +11,20 @@ import ntu.platform.cookery.ui.adapter.FBUserAdapter
 
 class FollowListViewModel(val userid: String = FBAuthRepository.getUser()!!.uid) : ViewModel() {
     val curUserId = FBAuthRepository.getUser()!!.uid
-    val followingOptions = FBDatabaseRepository.getFollowingOptions(userid)
+
     val onUserClicked = SingleLiveEvent<ECUser>()
-    val adapter = FBUserAdapter(followingOptions).also {
+    val followingOptions = FBDatabaseRepository.getFollowingOptions(userid)
+    val followingAdapter = FBUserAdapter(followingOptions).also {
+        it.clickedListener = BaseClickedListener{action, viewHolder ->
+            val pos = viewHolder.bindingAdapterPosition
+            val user = it.getItem(pos).apply {
+                uid = it.getRef(pos).key
+            }
+            onUserClicked.value = user
+        }
+    }
+    val followerOptions = FBDatabaseRepository.getFollowByOptions(userid)
+    val followerAdapter = FBUserAdapter(followerOptions).also {
         it.clickedListener = BaseClickedListener{action, viewHolder ->
             val pos = viewHolder.bindingAdapterPosition
             val user = it.getItem(pos).apply {
