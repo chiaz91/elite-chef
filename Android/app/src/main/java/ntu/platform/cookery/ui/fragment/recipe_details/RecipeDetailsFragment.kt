@@ -70,17 +70,13 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
             ingredients.observe(viewLifecycleOwner, {
                 _viewModel.ingredientsAdapter.items = it
                 _viewModel.ingredientsAdapter.notifyDataSetChanged()
-
-                // TODO: remove below
-                it.log()
+                it?.log()
             })
 
             steps.observe(viewLifecycleOwner, {
                 _viewModel.stepsAdapter.items = it
                 _viewModel.stepsAdapter.notifyDataSetChanged()
-
-                // TODO: remove below
-                it.log()
+                it?.log()
             })
         }
     }

@@ -99,9 +99,7 @@ fun Uri.getExtension(context: Context? = null): String {
 
 fun  <T : Any> List<T>.log(tag:String? = "Cy.Debug"){
     Log.d(tag, "List.size = $size")
-    forEach{ingredient ->
-        Log.d(tag, ingredient.toString())
-    }
+    forEach{item -> Log.d(tag, item.toString()) }
 }
 
 
