@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ntu.platform.cookery.R
@@ -55,9 +56,8 @@ class AddRecipeIngredientFragment : BindingFragment<FragmentAddRecipeIngredientB
             btnPrev.setOnClickListener {
                 findNavController().popBackStack()
             }
-            btnNext.setOnClickListener {
-                val action = AddRecipeIngredientFragmentDirections.actionAddRecipeIngredientFragmentToAddRecipeStepsFragment()
-                findNavController().navigate(action)
+            btnNext.setOnClickListener { it ->
+                next()
             }
 
             rvIngredient.apply {
@@ -83,6 +83,19 @@ class AddRecipeIngredientFragment : BindingFragment<FragmentAddRecipeIngredientB
 
     private fun toAddIngredient(){
         val action = AddRecipeIngredientFragmentDirections.actionAddRecipeIngredientFragmentToAddRecipeIngredientInfoFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun next(){
+        if (_viewModel.ingredients.isEmpty()){
+            Toast.makeText(requireContext(), "ingredients cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
+        toSteps()
+    }
+
+    private fun toSteps(){
+        val action = AddRecipeIngredientFragmentDirections.actionAddRecipeIngredientFragmentToAddRecipeStepsFragment()
         findNavController().navigate(action)
     }
 

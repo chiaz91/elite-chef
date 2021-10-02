@@ -2,9 +2,11 @@ package ntu.platform.cookery.ui.fragment.add_recipe
 
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ntu.platform.cookery.base.MutableListLiveData
+import ntu.platform.cookery.base.SingleLiveEvent
 import ntu.platform.cookery.data.entity.Ingredient
 import ntu.platform.cookery.data.entity.Recipe
 import ntu.platform.cookery.data.entity.RecipeStep
@@ -14,6 +16,9 @@ import java.util.*
 
 private const val TAG = "CY.VM.AddRecipe"
 class AddRecipeViewModel: ViewModel() {
+    val toastMsg = SingleLiveEvent<String>()
+    val onSaveComplete = SingleLiveEvent<Any>()
+
     val user = FBDatabaseRepository.getUser()
     val recipeId = MutableLiveData<String?>()
     val timeCreated = MutableLiveData<Long?>()
@@ -70,6 +75,16 @@ class AddRecipeViewModel: ViewModel() {
     fun saveRecipe(){
         // TODO: validate data
         // TODO: save data
+        if (ingredients.isEmpty()){
+            toastMsg.value = "ingredients cannot be empty"
+            return
+        }
+
+        if (steps.isEmpty()){
+            toastMsg.value = "Steps cannot be empty"
+
+            return
+        }
 
         Log.d(TAG, "save recipe")
         val recipe = Recipe(
@@ -88,6 +103,7 @@ class AddRecipeViewModel: ViewModel() {
         val refRecipe = FBDatabaseRepository.saveRecipe(recipe)
         FBDatabaseRepository.saveRecipeIngredients(refRecipe.key!!, ingredients.value!!)
         FBDatabaseRepository.saveRecipeSteps(refRecipe.key!!, steps.value!!)
+        onSaveComplete.call()
     }
 
     fun clearIngredientInfo(){

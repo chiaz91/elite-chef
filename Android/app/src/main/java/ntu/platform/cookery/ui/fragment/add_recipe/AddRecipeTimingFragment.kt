@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ntu.platform.cookery.R
@@ -56,11 +57,26 @@ class AddRecipeTimingFragment : BindingFragment<FragmentAddRecipeTimingBinding>(
                 findNavController().popBackStack()
             }
             btnNext.setOnClickListener {
-                val action = AddRecipeTimingFragmentDirections.actionAddRecipeTimingFragmentToAddRecipeIngredientFragment()
-                findNavController().navigate(action)
+                next()
             }
 
         }
+    }
+
+    private fun next(){
+        try{
+            val prepareTimeStr = _viewModel.timePrepare.value?.toString() ?: "0"
+            val prepareTime = Integer.parseInt(prepareTimeStr)
+            if (prepareTime == 0){
+                Toast.makeText(requireContext(), "Prepare time cannot be 0", Toast.LENGTH_SHORT).show()
+                return
+            }
+            val action = AddRecipeTimingFragmentDirections.actionAddRecipeTimingFragmentToAddRecipeIngredientFragment()
+            findNavController().navigate(action)
+        } catch (e: Exception){
+
+        }
+
     }
 
 

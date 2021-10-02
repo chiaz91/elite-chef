@@ -112,6 +112,14 @@ class AddRecipeInfoFragment : BindingFragment<FragmentAddRecipeInfoBinding>() {
                     Toast.makeText(requireContext(),  getString(R.string.message_graphic_is_required), Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
+                if (_viewModel.name.value.isNullOrEmpty()){
+                    Toast.makeText(requireContext(),  getString(R.string.message_name_is_required), Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                if (_viewModel.desc.value.isNullOrEmpty()){
+                    Toast.makeText(requireContext(),  getString(R.string.message_desc_is_required), Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 val action = AddRecipeInfoFragmentDirections.actionAddRecipeInfoFragmentToAddRecipeTimingFragment()
                 findNavController().navigate(action)
             }

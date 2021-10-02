@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ntu.platform.cookery.R
@@ -29,6 +30,7 @@ class AddRecipeStepFragment : BindingFragment<FragmentAddRecipeStepsBinding>() {
 
         initToolbar()
         initBinding()
+        observeViewModel()
     }
 
     private fun initToolbar(){
@@ -69,7 +71,19 @@ class AddRecipeStepFragment : BindingFragment<FragmentAddRecipeStepsBinding>() {
             }
 
         }
+    }
 
+    private fun observeViewModel(){
+        with(_viewModel){
+            toastMsg.observe(viewLifecycleOwner, {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            })
+
+            onSaveComplete.observe(viewLifecycleOwner, {
+                backToMain()
+            })
+
+        }
     }
 
     private fun toAddStep(){
@@ -91,9 +105,14 @@ class AddRecipeStepFragment : BindingFragment<FragmentAddRecipeStepsBinding>() {
 
 
     private fun doSave(){
+        if (_viewModel.steps.isEmpty()){
+            Toast.makeText(requireContext(), "Steps cannot be empty", Toast.LENGTH_SHORT).show()
+            return
+        }
         _viewModel.saveRecipe()
+    }
 
-
+    fun backToMain(){
         val action = AddRecipeStepFragmentDirections.actionAddRecipeStepsFragmentToRecipeListFragment()
         findNavController().navigate(action)
     }
