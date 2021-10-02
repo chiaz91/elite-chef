@@ -51,7 +51,7 @@ class FollowListFragment:  BindingFragment<FragmentFollowListBinding>() {
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when(tab?.text){
-                        "Follwoing" -> {
+                        "Following" -> {
                             rvUsers.adapter = _viewModel.followingAdapter
                         }
                         "Follower" -> {
