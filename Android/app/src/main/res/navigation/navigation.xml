@@ -156,21 +156,27 @@
         android:name="ntu.platform.cookery.ui.fragment.profile.ProfileOtherFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_profileOtherFragment_to_profile"
+            app:destination="@id/profile"
+            app:popUpTo="@id/profileOtherFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_profileOtherFragment_to_postCommentsFragment"
             app:destination="@id/postCommentsFragment" />
         <action
             android:id="@+id/action_profileOtherFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
-        <argument
-            android:name="userId"
-            app:argType="string" />
         <action
             android:id="@+id/action_profileOtherFragment_to_followListFragment"
             app:destination="@id/followListFragment" />
         <action
             android:id="@+id/action_profileOtherFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"

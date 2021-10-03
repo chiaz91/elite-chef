@@ -30,6 +30,10 @@ class ProfileOtherFragment:  BindingFragment<FragmentProfileBinding>() {
         val args by navArgs<ProfileOtherFragmentArgs>()
         val vmFactory = ProfileViewModelFactory(args.userId)
         _viewModel = ViewModelProvider(this, vmFactory).get(ProfileViewModel::class.java)
+        if (_viewModel.isCurrentUser){
+            val action = ProfileOtherFragmentDirections.actionProfileOtherFragmentToProfile()
+            findNavController().navigate(action)
+        }
 
     }
 
@@ -93,7 +97,6 @@ class ProfileOtherFragment:  BindingFragment<FragmentProfileBinding>() {
 
     private fun observeViewModel(){
         with(_viewModel){
-
             onPostClicked.observe(viewLifecycleOwner, {
                 val action = ProfileOtherFragmentDirections.actionProfileOtherFragmentToPostCommentsFragment(it)
                 findNavController().navigate(action)

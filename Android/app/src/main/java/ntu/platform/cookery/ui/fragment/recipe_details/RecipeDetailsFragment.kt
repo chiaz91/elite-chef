@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
+import ntu.platform.cookery.data.entity.ECUser
 import ntu.platform.cookery.data.firebase.FBDatabaseRepository
 import ntu.platform.cookery.databinding.FragmentRecipeDetailsBinding
 import ntu.platform.cookery.util.log
@@ -40,9 +41,6 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
 
         initBinding()
         observeViewModel()
-
-        // TODO: pending only author can modify if add authenticate
-
     }
 
     private fun initBinding(){
@@ -52,6 +50,10 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
             rvIngredient.adapter = _viewModel.ingredientsAdapter
             rvSteps.adapter = _viewModel.stepsAdapter
             rvComments.adapter = _viewModel.commentAdapter
+
+            profilePic.setOnClickListener{
+                viewProfile(_viewModel.recipe.value?.authorId!!)
+            }
         }
     }
 
@@ -59,6 +61,7 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
         with(_viewModel){
             onProfileClick.observe(viewLifecycleOwner, {
                 Log.d(TAG, "profileClicked::${it.uid}=${it.name}")
+                viewProfile(it.uid!!)
             })
 
             recipe.observe(viewLifecycleOwner, {
@@ -79,6 +82,11 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
                 it?.log()
             })
         }
+    }
+
+    private fun viewProfile(userId: String){
+        val action = RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToProfileOtherFragment(userId)
+        findNavController().navigate(action)
     }
 
 
