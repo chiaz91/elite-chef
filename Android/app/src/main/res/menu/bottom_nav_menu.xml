@@ -4,14 +4,14 @@
     <item
         android:id="@+id/newsfeed_list"
         android:icon="@drawable/ic_home"
-        android:title="newsfeed" />
+        android:title="@string/title_newsfeed" />
     <item
         android:id="@+id/recipe_list"
         android:icon="@drawable/ic_food"
-        android:title="Recipes" />
+        android:title="@string/title_recipes" />
 
     <item
         android:id="@+id/profile"
         android:icon="@drawable/ic_person"
-        android:title="Profile" />
+        android:title="@string/title_profile" />
 </menu>

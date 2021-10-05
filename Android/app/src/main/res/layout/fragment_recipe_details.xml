@@ -108,7 +108,7 @@
                         style="@style/Label.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cooking"
+                        android:text="@string/preparing"
                         app:layout_constraintEnd_toStartOf="@+id/label_baking"
                         app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
@@ -210,7 +210,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="Author" />
+                    android:text="@string/author" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -262,7 +262,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="Comments" />
+                    android:text="@string/comments" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvComments"
@@ -297,7 +297,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="Leave a comment"
+                    android:hint="@string/hint_leave_a_comment"
                     android:text="@={viewModel.message}" />
 
                 <Button
@@ -305,7 +305,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.sendMessage()}"
-                    android:text="Send" />
+                    android:text="@string/send" />
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
 

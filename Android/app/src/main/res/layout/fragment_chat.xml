@@ -46,7 +46,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:text="@={viewModel.message}"
-                android:hint="Message"
+                android:hint="@string/hint_message"
                 />
 
             <ImageButton
@@ -55,7 +55,6 @@
                 android:src="@drawable/ic_send"
                 android:padding="10dp"
                 android:background="?selectableItemBackgroundBorderless"
-                android:text="send"
                 android:onClick="@{()->viewModel.sendMessage()}"/>
         </LinearLayout>
 

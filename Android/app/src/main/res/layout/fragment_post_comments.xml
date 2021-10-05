@@ -44,7 +44,7 @@
                     android:layout_marginTop="30dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:text="Comments" />
+                    android:text="@string/comments" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvComments"
@@ -78,7 +78,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:hint="Leave a comment"
+                    android:hint="@string/hint_leave_a_comment"
                     android:text="@={viewModel.message}"
                     android:background="@null"
                     android:layout_weight="1" />
@@ -88,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.sendMessage()}"
-                    android:text="Send" />
+                    android:text="@string/send" />
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
 

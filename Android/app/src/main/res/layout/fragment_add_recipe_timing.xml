@@ -53,7 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prepare_time"
-                        app:helperText="@string/prepare_time_helper"
+                        app:helperText="@string/hint_prepare_time_helper"
                         app:layout_constraintTop_toTopOf="parent"
                         app:suffixText="@string/suffix_minutes">
 
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_normal"
                         android:hint="@string/baking_time"
-                        app:helperText="@string/baking_time_helper"
+                        app:helperText="@string/hint_baking_time_helper"
                         app:layout_constraintTop_toTopOf="parent"
                         app:suffixText="@string/suffix_minutes">
 
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_normal"
                         android:hint="@string/rest_time"
-                        app:helperText="@string/rest_time_helper"
+                        app:helperText="@string/hint_rest_time_helper"
                         app:layout_constraintTop_toTopOf="parent"
                         app:suffixText="@string/suffix_minutes">
 

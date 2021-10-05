@@ -22,7 +22,6 @@ class RecipeListFragment: BindingFragment<FragmentRecipeListBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         setToolBar(binding.toolbarLayout.toolbar)
-        setTitle("Recipes")
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = _viewModel

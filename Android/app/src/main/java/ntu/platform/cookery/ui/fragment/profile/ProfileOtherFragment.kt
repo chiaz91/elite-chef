@@ -71,11 +71,11 @@ class ProfileOtherFragment:  BindingFragment<FragmentProfileBinding>() {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     Log.d(TAG, "onTabSelected::id=${tab?.id}, content=${tab?.text}")
                     when (tab?.text) {
-                        "Posts" -> {
+                        getString(R.string.posts)  -> {
                             rvPosts.visibility = View.VISIBLE
                             rvRecipes.visibility = View.GONE
                         }
-                        "Recipes" -> {
+                        getString(R.string.recipes)  -> {
                             rvPosts.visibility = View.GONE
                             rvRecipes.visibility = View.VISIBLE
                         }

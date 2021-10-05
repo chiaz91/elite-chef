@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
+import ntu.platform.cookery.R
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.databinding.FragmentFollowListBinding
 import ntu.platform.cookery.ui.fragment.profile.ProfileOtherFragmentArgs
+import ntu.platform.cookery.util.setTitle
 import ntu.platform.cookery.util.setToolBar
 
 private const val TAG = "Cy.follow"
@@ -51,10 +53,12 @@ class FollowListFragment:  BindingFragment<FragmentFollowListBinding>() {
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when(tab?.text){
-                        "Following" -> {
+                        getString(R.string.following) -> {
+                            setTitle( tab.text.toString() )
                             rvUsers.adapter = _viewModel.followingAdapter
                         }
-                        "Follower" -> {
+                        getString(R.string.follower) -> {
+                            setTitle( tab.text.toString() )
                             rvUsers.adapter = _viewModel.followerAdapter
                         }
                     }

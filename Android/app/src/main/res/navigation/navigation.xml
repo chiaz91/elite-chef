@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/addRecipeTimingFragment"
         android:name="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeTimingFragment"
-        android:label="AddRecipeTimingFragment"
+        android:label="@string/title_recipe_timing"
         tools:layout="@layout/fragment_add_recipe_timing" >
         <action
             android:id="@+id/action_addRecipeTimingFragment_to_addRecipeIngredientFragment"
@@ -99,7 +99,7 @@
     <fragment
         android:id="@+id/newsfeed_list"
         android:name="ntu.platform.cookery.ui.fragment.newsfeed.NewsfeedFragment"
-        android:label="@string/newsfeed"
+        android:label="@string/title_newsfeed"
         tools:layout="@layout/fragment_newsfeed" >
         <action
             android:id="@+id/action_newsfeed_list_to_newPostFragment"
@@ -112,7 +112,7 @@
     <fragment
         android:id="@+id/newPostFragment"
         android:name="ntu.platform.cookery.ui.fragment.new_post.NewPostFragment"
-        android:label="New Post"
+        android:label="@string/title_new_post"
         tools:layout="@layout/fragment_new_post"/>
     <fragment
         android:id="@+id/postCommentsFragment"
@@ -133,7 +133,7 @@
     <fragment
         android:id="@+id/profile"
         android:name="ntu.platform.cookery.ui.fragment.profile.ProfileFragment"
-        android:label="@string/profile"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profile_to_profileEditFragment"
@@ -154,7 +154,7 @@
     <fragment
         android:id="@+id/profileOtherFragment"
         android:name="ntu.platform.cookery.ui.fragment.profile.ProfileOtherFragment"
-        android:label="Profile"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
         <argument
             android:name="userId"
@@ -181,7 +181,7 @@
     <fragment
         android:id="@+id/profileEditFragment"
         android:name="ntu.platform.cookery.ui.fragment.profile_edit.ProfileEditFragment"
-        android:label="Update Profile"
+        android:label="@string/title_profile_update"
         tools:layout="@layout/fragment_profile_edit">
         <argument
             android:name="user"
@@ -190,7 +190,7 @@
     <fragment
         android:id="@+id/followListFragment"
         android:name="ntu.platform.cookery.ui.fragment.follow_list.FollowListFragment"
-        android:label="Following"
+        android:label="@string/title_following"
         tools:layout="@layout/fragment_follow_list">
         <argument
             android:name="userId"
@@ -202,7 +202,7 @@
     <fragment
         android:id="@+id/chatListFragment"
         android:name="ntu.platform.cookery.ui.fragment.chat_list.ChatListFragment"
-        android:label="Chats"
+        android:label="@string/title_chat_list"
         tools:layout="@layout/fragment_chat_list">
         <action
             android:id="@+id/action_chatListFragment_to_chatFragment"
@@ -211,7 +211,7 @@
     <fragment
         android:id="@+id/chatFragment"
         android:name="ntu.platform.cookery.ui.fragment.chat.ChatFragment"
-        android:label="Chat"
+        android:label="@string/title_chat"
         tools:layout="@layout/fragment_chat">
         <argument
             android:name="chatId"

@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:background="@null"
-                    android:hint="Want to share anything?"
+                    android:hint="@string/hint_want_to_share_anything"
                     android:text="@={viewModel.message}"/>
 
 
