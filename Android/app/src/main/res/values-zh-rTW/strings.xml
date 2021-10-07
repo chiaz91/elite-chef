@@ -65,8 +65,8 @@
     <string name="ingredient_name">食材名</string>
     <string name="amount">數量</string>
     <string name="unit">單位</string>
-    <string name="enter_recipe_name">輸入食譜名</string>
-    <string name="enter_recipe_description">輸入食譜介紹</string>
+    <string name="recipe_name">食譜名</string>
+    <string name="recipe_description">食譜介紹</string>
     <string name="uploading_graphic_for_respective_step">上傳步驟相關圖示</string>
     <string name="warn_deleting_recipe_message">刪除的食譜不可被回復</string>
     <string name="warn_delete_ingredient_message">刪除的食材不可被回復</string>

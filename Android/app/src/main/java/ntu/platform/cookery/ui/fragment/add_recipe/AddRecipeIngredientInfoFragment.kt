@@ -66,7 +66,7 @@ class AddRecipeIngredientInfoFragment : BindingFragment<FragmentAddRecipeIngredi
             val amount  = _viewModel.ingredientAmount.value?.toInt()
             val unit = _viewModel.ingredientUnit.value
 
-            _viewModel.ingredients.add(Ingredient(name!!, amount!!, unit!!))
+            _viewModel.ingredients.add(Ingredient(name!!, amount!!, unit?:""))
             findNavController().popBackStack()
         } catch (e: Exception){
             e.printStackTrace()

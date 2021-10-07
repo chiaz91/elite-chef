@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:hint="@string/enter_recipe_name"
+                    android:hint="@string/recipe_name"
                     app:endIconMode="clear_text"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:hint="@string/enter_recipe_description"
+                    android:hint="@string/recipe_description"
                     app:endIconMode="clear_text"
                     app:layout_constraintTop_toBottomOf="@+id/input_name">
 
