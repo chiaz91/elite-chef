@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Elite Chefs</string>
+    <string name="title_recipes">食譜</string>
+    <string name="title_recipe_info">食譜資訊</string>
+    <string name="title_ingredient_list">食材清單</string>
+    <string name="title_step_list">步驟列表</string>
+    <string name="title_ingredient_info">食材資訊</string>
+    <string name="title_step_info">步驟資訊</string>
+    <string name="title_recipe_details">食譜詳情</string>
+    <string name="title_create_recipe">新增食譜</string>
+    <string name="title_edit_recipe">更改食譜</string>
+    <string name="title_add_Ingredient">添加食材</string>
+    <string name="title_add_step">添加步驟</string>
+    <string name="title_recipe_timing">時間</string>
+    <string name="title_new_post">新增貼文</string>
+    <string name="title_profile">個人資訊</string>
+    <string name="title_profile_update">更改個資</string>
+    <string name="title_following">關注</string>
+    <string name="title_chat_list">歷史對話</string>
+    <string name="title_chat">聊天</string>
+    <string name="title_newsfeed">動態彙總</string>
+    <!-- Action Buttons -->
+    <string name="action_settings">設定</string>
+    <string name="add">添加</string>
+    <string name="add_more">添加更多</string>
+    <string name="prev">返回</string>
+    <string name="next">繼續</string>
+    <string name="save">儲存</string>
+    <string name="send">發送</string>
+    <string name="post">發布</string>
+    <string name="update">更新</string>
+    <string name="follow">Follow</string>
+    <string name="edit">更改</string>
+    <string name="delete">刪除</string>
+    <string name="deletion">刪除</string>
+    <string name="confirm">確認</string>
+    <string name="cancel">取消</string>
+    <string name="log_out">登出</string>
+    <!-- Common -->
+    <string name="comments">留言</string>
+    <string name="posts">發文</string>
+    <string name="recipes">食譜</string>
+    <string name="hint_bio">個人簡介</string>
+    <!-- Recipes -->
+    <string name="preparing">準備</string>
+    <string name="resting">放置</string>
+    <string name="baking">烘培</string>
+    <string name="author">作者</string>
+    <string name="description">介紹</string>
+    <string name="ingredients">食材</string>
+    <string name="timing_mins">時間 (分)</string>
+    <string name="recipe_graphic">食譜圖示</string>
+    <string name="steps">步驟列表</string>
+    <string name="step_count">第%d步</string>
+    <string name="step_info">步驟資訊</string>
+    <string name="instruction">步驟說明</string>
+    <string name="rest_time">放置時間</string>
+    <string name="baking_time">烘培時間</string>
+    <string name="prepare_time">準備時間</string>
+    <!-- Recipes:Label/Message -->
+    <string name="steps_required">步驟*</string>
+    <string name="ingredients_required">食材*</string>
+    <string name="recipe_info_required">食譜資訊*</string>
+    <string name="ingredients_info">食材資訊</string>
+    <string name="ingredient_name">食材名</string>
+    <string name="amount">數量</string>
+    <string name="unit">單位</string>
+    <string name="enter_recipe_name">輸入食譜名</string>
+    <string name="enter_recipe_description">輸入食譜介紹</string>
+    <string name="uploading_graphic_for_respective_step">上傳步驟相關圖示</string>
+    <string name="warn_deleting_recipe_message">刪除的食譜不可被回復</string>
+    <string name="warn_delete_ingredient_message">刪除的食材不可被回復</string>
+    <string name="warn_delete_step_message">刪除的步驟不可被回復</string>
+    <string name="message_graphic_is_required">圖示為必須欄位!</string>
+    <string name="message_name_is_required">名字為必填欄位!</string>
+    <string name="message_desc_is_required">說明為必填欄位!</string>
+    <string name="hint_prepare_time_helper">Time spend actively prepare or cook the food</string>
+    <string name="hint_baking_time_helper">Duration for the dish to be bake for</string>
+    <string name="hint_rest_time_helper">Duration for the dish to be rest aside.</string>
+    <string name="suffix_minutes">分</string>
+
+    <!-- Profile -->
+    <string name="following">Following</string>
+    <string name="following_count">%d Following</string>
+    <string name="follower_count">%d Follower</string>
+    <string name="follower">Follower</string>
+
+    <string name="hint_message">訊息</string>
+    <string name="hint_want_to_share_anything">想要分享任何事情嗎?</string>
+    <string name="hint_display_name">名字</string>
+    <string name="hint_leave_a_comment">留言</string>
+</resources>
