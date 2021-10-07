@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="ntu.platform.cookery.ui.fragment.add_recipe.AddRecipeViewModel" />
-
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/yellow">
+        android:background="@color/yellow"
+        app:layoutDescription="@xml/splash_motion">
 
         <ImageView
             android:id="@+id/logo"
@@ -40,5 +39,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
