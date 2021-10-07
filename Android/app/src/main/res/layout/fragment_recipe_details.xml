@@ -65,8 +65,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_marginBottom="?attr/actionBarSize">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -184,8 +183,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/item_ingredient"
-                    tools:itemCount="2"/>
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_ingredient" />
 
                 <TextView
                     android:id="@+id/label_steps"
@@ -200,8 +199,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/item_step_large"
-                    tools:itemCount="1"/>
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_step_large" />
 
 
                 <TextView
@@ -268,46 +267,45 @@
                     android:id="@+id/rvComments"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_user_comment"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     tools:itemCount="1"
-                    />
+                    tools:listitem="@layout/item_user_comment" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.bottomappbar.BottomAppBar
+
+        <LinearLayout
             android:id="@+id/bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-            android:minHeight="0dp">
+            android:background="?colorSurface"
+            android:elevation="10dp"
+            android:orientation="horizontal"
+            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/input"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/hint_leave_a_comment"
+                android:text="@={viewModel.message}" />
 
-                <EditText
-                    android:id="@+id/input"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="@string/hint_leave_a_comment"
-                    android:text="@={viewModel.message}" />
-
-                <Button
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.sendMessage()}"
-                    android:text="@string/send" />
-            </LinearLayout>
-        </com.google.android.material.bottomappbar.BottomAppBar>
+            <ImageButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:onClick="@{()->viewModel.sendMessage()}"
+                android:padding="10dp"
+                android:src="@drawable/ic_send"
+                android:text="@string/send" />
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
