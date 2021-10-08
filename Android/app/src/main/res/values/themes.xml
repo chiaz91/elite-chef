@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.EC" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.EC" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/white</item>

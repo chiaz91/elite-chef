@@ -28,9 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:contentScrim="@color/white"
+                app:contentScrim="?colorSurface"
                 app:statusBarScrim="@android:color/transparent"
-                android:background="@color/white"
+                android:background="?colorSurface"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:toolbarId="@+id/toolbar"
                 app:titleEnabled="false">
