@@ -21,7 +21,7 @@ import ntu.platform.cookery.databinding.FragmentSplashBinding
 import ntu.platform.cookery.ui.MainActivity
 
 private const val TAG = "Cy.Launcher"
-private const val DELAY_MS = 2500L
+private const val DELAY_MS = 1500L
 class LauncherFragment : BindingFragment<FragmentSplashBinding>() {
     override val bindingInflater: (LayoutInflater) -> FragmentSplashBinding
         get() = FragmentSplashBinding::inflate
