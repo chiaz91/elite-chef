@@ -6,8 +6,6 @@ import androidx.databinding.ViewDataBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import ntu.platform.cookery.BR
-import ntu.platform.cookery.databinding.ItemRecipeBinding
-import ntu.platform.cookery.data.entity.Recipe
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.BaseRecyclerViewHolder
 import ntu.platform.cookery.data.entity.Chat
@@ -16,6 +14,7 @@ import ntu.platform.cookery.databinding.ItemChatRoomBinding
 
 class FBChatListAdapter(
     options: FirebaseRecyclerOptions<Chat>,
+
     var clickedListener: BaseClickedListener? = null
 ): FirebaseRecyclerAdapter<Chat, FBChatListAdapter.ChatroomViewHolder>(options) {
     companion object{

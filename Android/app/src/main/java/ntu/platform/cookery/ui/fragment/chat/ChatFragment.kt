@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import ntu.platform.cookery.base.BindingFragment
 import ntu.platform.cookery.databinding.FragmentChatBinding
+import ntu.platform.cookery.util.setSubTitle
 import ntu.platform.cookery.util.setToolBar
 
 
@@ -52,6 +53,13 @@ class ChatFragment:  BindingFragment<FragmentChatBinding>() {
 
     private fun observeViewModel(){
         with(_viewModel){
+            chatMembers.observe(viewLifecycleOwner, {
+                _viewModel.messageAdapter.updateMembers(it)
+
+                val chatName = it.joinToString(" and "){ user -> user.name!!}
+                _viewModel.chat.value?.title = chatName
+                setSubTitle(chatName)
+            })
 
         }
     }

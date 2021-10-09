@@ -19,6 +19,7 @@ class ChatViewModel(val chatId: String ) : ViewModel() {
     // remote data
     val user = FBDatabaseRepository.getUser()
     val chat = FBDatabaseRepository.getChat(chatId)
+    val chatMembers = FBDatabaseRepository.getChatMembers(chatId)
     val chatMessagesOptions = FBDatabaseRepository.getChatMessagesOptions(chatId)
     val messageAdapter = FBChatMessagesAdapter(chatMessagesOptions)
 

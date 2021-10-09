@@ -45,6 +45,12 @@ fun Fragment.setTitle(title: String) {
     }
 }
 
+fun Fragment.setSubTitle(title: String) {
+    if (activity is AppCompatActivity) {
+        (activity as AppCompatActivity).supportActionBar?.subtitle = title
+    }
+}
+
 fun Fragment.setTitle(@StringRes stringId: Int) {
     setTitle(requireContext().getString(stringId))
 }

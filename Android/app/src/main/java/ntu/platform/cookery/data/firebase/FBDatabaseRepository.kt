@@ -454,6 +454,28 @@ object FBDatabaseRepository{
 
     }
 
+    fun getChatMembers(chatid: String):  MutableLiveData<List<ECUser>>{
+        val result = MutableLiveData<List<ECUser>>()
+        db.reference.child(REF_CHAT_MEMBER).child(chatid)
+            .get()
+            .addOnSuccessListener {
+                val members = mutableListOf<ECUser>()
+                it.children.forEach{ memberSnapshop ->
+                    val uid = memberSnapshop.key
+                    val user = memberSnapshop.getValue<ECUser>()!!.apply {
+                        this.uid = uid
+                    }
+                    Log.d(TAG, "loadChatMember.member=${uid}::${user.name}")
+                    members.add(user)
+                }
+                result.value = members
+            }
+            .addOnFailureListener{
+                Log.e(TAG, "getChatMembers(${chatid}), error${it.message}")
+            }
+        return result
+    }
+
     fun saveChatMessage(chat: Chat, message: ChatMessage){
         val refMessage = db.reference.child(REF_CHAT_MESSAGES).child(chat.key!!).push()
         refMessage.setValue(message)

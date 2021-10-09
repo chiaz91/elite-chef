@@ -1,7 +1,6 @@
 package ntu.platform.cookery.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -10,18 +9,18 @@ import ntu.platform.cookery.BR
 import ntu.platform.cookery.base.BaseClickedListener
 import ntu.platform.cookery.base.BaseRecyclerViewHolder
 import ntu.platform.cookery.data.entity.ChatMessage
-import ntu.platform.cookery.data.entity.UserComment
+import ntu.platform.cookery.data.entity.ECUser
 import ntu.platform.cookery.data.firebase.FBAuthRepository
 import ntu.platform.cookery.databinding.ItemMsgReceiveBinding
 import ntu.platform.cookery.databinding.ItemMsgSendBinding
-import ntu.platform.cookery.databinding.ItemUserCommentBinding
 import ntu.platform.cookery.util.isSameDate
 
 
 class FBChatMessagesAdapter(
     options: FirebaseRecyclerOptions<ChatMessage>,
     val userId: String = FBAuthRepository.getUser()!!.uid,
-    var clickedListener: BaseClickedListener? = null
+    var clickedListener: BaseClickedListener? = null,
+    val members: MutableList<ECUser> = mutableListOf()
 ): FirebaseRecyclerAdapter<ChatMessage, FBChatMessagesAdapter.MessageViewHolder>(options) {
     companion object{
         private const val TYPE_MSG_SEND = 1
@@ -31,6 +30,11 @@ class FBChatMessagesAdapter(
         const val ACTION_PROFILE_CLICK = 1002
     }
 
+    fun updateMembers(newMembers: List<ECUser>){
+        members.clear()
+        members.addAll(newMembers)
+        notifyDataSetChanged()
+    }
 
 
     override fun getItemViewType(position: Int): Int {
@@ -59,6 +63,8 @@ class FBChatMessagesAdapter(
             !isSameDate(model.timestamp!!, getItem(position-1).timestamp!!) -> true
             else -> false
         }
+        // bind message owner info
+        model.user = members.find { it.uid == model.senderId }
         holder.bindAs(model, showDate, clickedListener)
     }
 

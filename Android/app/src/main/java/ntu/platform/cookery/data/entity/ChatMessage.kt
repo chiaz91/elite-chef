@@ -9,4 +9,5 @@ data class ChatMessage(
     val graphic: String? = null,
     val timestamp: Long? = null,
     @get: Exclude var key: String? =null,
+    @get: Exclude var user:ECUser? = null
 )
