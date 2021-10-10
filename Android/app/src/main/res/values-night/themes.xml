@@ -18,6 +18,8 @@
         <item name="android:statusBarColor">?attr/backgroundColor</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="colorLauncherBackground">@color/dark_grey</item>
     </style>
 
     <style name="Widget.EC.Toolbar" parent="Widget.MaterialComponents.Toolbar">
