@@ -57,19 +57,21 @@
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/Theme.NestedScrolling.PopupOverlay" />
 
-                <ImageButton
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:fitsSystemWindows="true"
-                    android:src="@{viewModel.liked ? @drawable/heart :@drawable/heart_outline}"
-                    android:onClick="@{()->viewModel.onLikeClicked()}"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:layout_gravity="bottom|end"
-                    app:tint="#f00" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/like_recipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:onClick="@{()->viewModel.onLikeClicked()}"
+            android:src="@{viewModel.liked ? @drawable/heart :@drawable/heart_outline}"
+            android:visibility="gone"
+            app:layout_anchor="@+id/app_bar"
+            app:layout_anchorGravity="bottom|end" />
 
 
         <androidx.core.widget.NestedScrollView
@@ -90,6 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.recipe.name}"
+                    android:layout_marginTop="15dp"
                     tools:text="Recipe name" />
 
                 <TextView

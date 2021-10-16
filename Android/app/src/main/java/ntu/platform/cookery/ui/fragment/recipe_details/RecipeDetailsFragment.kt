@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -65,9 +66,9 @@ class RecipeDetailsFragment: BindingFragment<FragmentRecipeDetailsBinding>() {
             })
 
             recipe.observe(viewLifecycleOwner, {
-                if (it.authorId == _viewModel.user.value!!.uid!!){
-                    setHasOptionsMenu(true)
-                }
+                val sameUser = it.authorId == _viewModel.user.value!!.uid!!
+                setHasOptionsMenu(sameUser)
+                binding.likeRecipe.isVisible = !sameUser
             })
 
             ingredients.observe(viewLifecycleOwner, {
