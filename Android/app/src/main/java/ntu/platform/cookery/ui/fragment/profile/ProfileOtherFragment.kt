@@ -78,6 +78,12 @@ class ProfileOtherFragment:  BindingFragment<FragmentProfileBinding>() {
                         getString(R.string.recipes)  -> {
                             rvPosts.visibility = View.GONE
                             rvRecipes.visibility = View.VISIBLE
+                            rvRecipes.adapter = _viewModel.recipeAdapter
+                        }
+                        getString(R.string.liked_recipe) -> {
+                            rvPosts.visibility = View.GONE
+                            rvRecipes.visibility = View.VISIBLE
+                            rvRecipes.adapter = _viewModel.recipeLikedAdapter
                         }
                         else -> Log.d(TAG, "Something wrong, text=${tab?.text}")
                     }
@@ -117,6 +123,7 @@ class ProfileOtherFragment:  BindingFragment<FragmentProfileBinding>() {
         with(_viewModel){
             postAdapter.startListening()
             recipeAdapter.startListening()
+            recipeLikedAdapter.startListening()
         }
     }
 
@@ -124,6 +131,7 @@ class ProfileOtherFragment:  BindingFragment<FragmentProfileBinding>() {
         with(_viewModel){
             postAdapter.stopListening()
             recipeAdapter.stopListening()
+            recipeLikedAdapter.stopListening()
         }
         super.onStop()
     }

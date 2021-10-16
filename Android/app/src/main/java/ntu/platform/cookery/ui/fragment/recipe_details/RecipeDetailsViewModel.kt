@@ -16,6 +16,7 @@ import java.util.*
 
 private const val TAG = "CY.VM.RecipeDetail"
 class RecipeDetailsViewModel(val recipeId: String): ViewModel() {
+    val liked = FBDatabaseRepository.hasLikeRecipe(recipeId)
     var user = FBDatabaseRepository.getUser()
     var recipe = FBDatabaseRepository.getRecipe(recipeId)
     var ingredients = FBDatabaseRepository.getRecipeIngredients(recipeId)
@@ -64,6 +65,15 @@ class RecipeDetailsViewModel(val recipeId: String): ViewModel() {
         }
 
     }
+
+
+    fun onLikeClicked(){
+        when(liked.value!!){
+            true -> FBDatabaseRepository.unlikeRecipe(recipeId)
+            else -> FBDatabaseRepository.likeRecipe(recipeId)
+        }
+    }
+
 
 
 

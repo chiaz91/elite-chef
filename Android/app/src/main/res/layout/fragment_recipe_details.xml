@@ -57,6 +57,16 @@
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/Theme.NestedScrolling.PopupOverlay" />
 
+                <ImageButton
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:fitsSystemWindows="true"
+                    android:src="@{viewModel.liked ? @drawable/heart :@drawable/heart_outline}"
+                    android:onClick="@{()->viewModel.onLikeClicked()}"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_gravity="bottom|end"
+                    app:tint="#f00" />
+
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>

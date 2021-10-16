@@ -46,6 +46,18 @@ class ProfileViewModel(val userId:String=FBAuthRepository.getUser()!!.uid) : Vie
         }
     }
 
+    val recipeLikedOptions = FBDatabaseRepository.getUserLikedRecipe(userId)
+    val recipeLikedAdapter = FBRecipeAdapter(recipeLikedOptions).also {
+        it.clickedListener = BaseClickedListener { action, viewHolder ->
+            Log.d(TAG, "$action, click on item ${viewHolder.bindingAdapterPosition}")
+            val pos = viewHolder.bindingAdapterPosition
+            val recipe = it.getItem(pos).apply {
+                key = it.getRef(pos).key
+            }
+            onRecipeClicked.value = recipe
+        }
+    }
+
     fun onFollowClicked(){
         when(hasFollowUser.value!!){
             true -> FBDatabaseRepository.unfollowUser(user.value!!)

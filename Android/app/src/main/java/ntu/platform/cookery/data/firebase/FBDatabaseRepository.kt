@@ -168,6 +168,56 @@ object FBDatabaseRepository{
             .build()
     }
 
+    // user like recipes
+    fun hasLikeRecipe (recipeId: String, userId: String? = FBAuthRepository.getUser()!!.uid): MutableLiveData<Boolean>{
+        val result = MutableLiveData<Boolean>(false)
+        db.reference.child(REF_USERS_LIKE_RECIPE).child(userId!!).child(recipeId)
+            .addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    result.value = snapshot.exists()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e(TAG, "hasLikeRecipe failed, err=${error.message}")
+                }
+            })
+        return result
+    }
+
+    fun likeRecipe(recipeId: String, userId: String = FBAuthRepository.getUser()!!.uid){
+        db.reference.child(REF_USERS_LIKE_RECIPE).child(userId).child(recipeId).setValue(true)
+            .addOnSuccessListener {
+                Log.e(TAG, "followUser Success")
+            }
+            .addOnFailureListener{
+                Log.e(TAG, "followUser failed, err=${it.message}")
+            }
+
+        // add user follow by
+        db.reference.child(REF_RECIPES_LIKES).child(recipeId).child(userId).setValue(true)
+            .addOnSuccessListener {
+                Log.e(TAG, "userFollowBy Success")
+            }
+            .addOnFailureListener{
+                Log.e(TAG, "userFollowBy failed, err=${it.message}")
+            }
+    }
+
+    fun unlikeRecipe(recipeId: String, userId: String = FBAuthRepository.getUser()!!.uid){
+        db.reference.child(REF_USERS_LIKE_RECIPE).child(userId).child(recipeId).removeValue()
+        db.reference.child(REF_RECIPES_LIKES).child(recipeId).child(userId).removeValue()
+    }
+
+    fun getUserLikedRecipe(userId: String=FBAuthRepository.getUser()!!.uid):  FirebaseRecyclerOptions<Recipe>{
+        val keyQuery = db.reference.child(REF_USERS_LIKE_RECIPE).child(userId)
+        val dataRef  = db.reference.child(REF_RECIPES)
+
+        return FirebaseRecyclerOptions.Builder<Recipe>()
+            .setIndexedQuery(keyQuery, dataRef, Recipe::class.java)
+            .build()
+    }
+
+
 
 
 
