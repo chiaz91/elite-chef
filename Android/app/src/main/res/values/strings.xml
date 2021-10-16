@@ -90,4 +90,5 @@
     <string name="hint_display_name">Display Name</string>
     <string name="hint_leave_a_comment">Leave a comment</string>
     <string name="liked_recipe">Liked</string>
+    <string name="choose_theme">Choose Theme</string>
 </resources>

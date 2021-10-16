@@ -1,9 +1,11 @@
 package ntu.platform.cookery.ui.fragment.profile
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
@@ -148,6 +150,11 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
                 true
             }
 
+            R.id.action_theme -> {
+                chooseThemeDialog()
+                true
+            }
+
             R.id.action_logout -> {
                 FBAuthRepository.logout()
                 true
@@ -165,6 +172,22 @@ class ProfileFragment:  BindingFragment<FragmentProfileBinding>() {
     fun toChatList(){
         val action = ProfileFragmentDirections.actionProfileToChatListFragment()
         findNavController().navigate(action)
+    }
+
+    private fun chooseThemeDialog() {
+        val styles = resources.getStringArray(R.array.theme_color)
+        val builder = AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.choose_theme))
+            .setSingleChoiceItems(styles, 0) { dialog, which ->
+                when (which) {
+                    0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    2 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                }
+            }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
 }

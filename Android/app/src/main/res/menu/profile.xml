@@ -8,6 +8,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_theme"
+        android:title="Theme"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_logout"
         android:title="@string/log_out"
         app:showAsAction="never" />
